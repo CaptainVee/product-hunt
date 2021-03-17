@@ -1,0 +1,9 @@
+.Products {
+    display: flex;
+    flex-direction: column;
+    padding: 3em 8em;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+}

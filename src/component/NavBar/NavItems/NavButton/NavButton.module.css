@@ -1,0 +1,24 @@
+.SignIn {
+    height: 3em;
+    width: 6em;
+    border-radius: 1em;
+    color: white;
+    border: 1px solid #FB6D3A;
+    background-color: #503E9D;
+    outline: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.SignUp {
+    height: 3em;
+    width: 6em;
+    border-radius: 1em;
+    color: white;
+    border: 1px solid #FB6D3A;
+    background-color: #FB6D3A;
+    outline: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-left: 2em;
+}
