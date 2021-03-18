@@ -1,0 +1,12 @@
+.Button {
+    height: 3em;
+    width: 6em;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #FB6D3A;
+    outline: none;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    cursor: pointer;
+}

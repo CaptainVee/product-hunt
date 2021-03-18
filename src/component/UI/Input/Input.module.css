@@ -1,0 +1,22 @@
+.Input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.InputElement {
+    width: 100%;
+    height: 2em;
+    border-radius: 1em;
+    border: 1px solid grey;
+    outline: none;
+    padding: 1em 1.2em;
+    font-size: 1.2rem;
+}
+
+.Label {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    margin-bottom: 0.5em;
+}

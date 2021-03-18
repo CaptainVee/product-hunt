@@ -1,0 +1,30 @@
+.FormContainer {
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.SignInForm {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-sizing: border-box;
+    box-shadow: 4px 4px 18px rgba(0,0,0,0.1);
+    border-radius: 1em;
+    padding: 2em;
+    width: 40%;
+}
+
+.SignInForm h2 {
+    text-transform: uppercase;
+    color: #FB6D3A;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.ButtonContainer {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
