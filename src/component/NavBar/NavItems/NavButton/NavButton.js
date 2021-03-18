@@ -1,10 +1,13 @@
 import  React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import classes from './NavButton.module.css';
 
 const NavButton = (props) => {
     return (
-        <button className = {classes[props.styleName]}>{props.children}</button>
+        <NavLink className = {classes[props.styleName]} to = {props.link}>
+            {props.children}
+        </NavLink>
     );
 }
 

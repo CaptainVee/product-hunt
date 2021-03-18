@@ -1,13 +1,20 @@
-// import Products from './container/Products/Products';
-import NavBar from './component/NavBar/NavBar';
-// import SignIn from './container/SignIn/SignIn';
+import Products from './container/Products/Products';
 import SignUp from './container/SignUp/SignUp';
+import Layout from './component/Layout/Layout';
+
+import { Route, Switch} from 'react-router-dom';
+import SignIn from './container/SignIn/SignIn';
 
 function App() {
   return (
-    <div >
-      <NavBar />
-      <SignUp />
+    <div>
+       <Layout>
+          <Switch>
+            <Route path = '/signup' component = {SignUp}/>
+            <Route path = '/signin' component = {SignIn}/>
+            <Route path = '/' exact component = {Products}/>
+          </Switch>
+      </Layout>
     </div>
   );
 }

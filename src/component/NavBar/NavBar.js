@@ -17,8 +17,8 @@ const NavBar = (props) => {
                 <NavItems />
             </div>
             <div className = {classes.NavButtons}>
-                <NavButton styleName = 'SignIn'>Sign In</NavButton>
-                <NavButton styleName = 'SignUp'>Sign Up</NavButton>
+                <NavButton link = '/signin' styleName = 'SignIn'>Sign In</NavButton>
+                <NavButton link = '/signup' styleName = 'SignUp'>Sign Up</NavButton>
             </div>
         </header>
     );
