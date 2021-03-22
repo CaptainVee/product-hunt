@@ -19,15 +19,15 @@ class SignIn extends Component {
                 },
                 value: ''
             },
-            email: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'email',
-                    placeholder: 'Your Email',
-                    required: true
-                },
-                value: ''
-            },
+            // email: {
+            //     elementType: 'input',
+            //     elementConfig: {
+            //         type: 'email',
+            //         placeholder: 'Your Email',
+            //         required: true
+            //     },
+            //     value: ''
+            // },
             password: {
                 elementType: 'input',
                 elementConfig: {
@@ -54,10 +54,9 @@ class SignIn extends Component {
         event.preventDefault();
         let loginDetails = {
             username: this.state.signInForm.username.value,
-            email: this.state.signInForm.email.value,
             password: this.state.signInForm.password.value
         }
-        axios.post('https://restapi-4u.herokuapp.com/rest-auth/login', loginDetails)
+        axios.post('https://restapi-4u.herokuapp.com/login/', loginDetails)
         .then((response) => {
             console.log(response);
         })

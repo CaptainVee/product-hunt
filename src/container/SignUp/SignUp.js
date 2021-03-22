@@ -28,6 +28,16 @@ class SignUp extends Component {
                 value: '',
                 errmsg: ''
             },
+            confirmEmail: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'email',
+                    placeholder: 'Confirm Email',
+                    required: true
+                },
+                value: '',
+                errmsg: ''
+            },
             password: {
                 elementType: 'input',
                 elementConfig: {
@@ -37,19 +47,11 @@ class SignUp extends Component {
                 },
                 value: '',
                 errmsg: ''
-            },
-            confirmPassword: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'password',
-                    placeholder: 'Confirm Password',
-                    required: true
-                },
-                value: '',
-                errmsg: ''
             }
         }
     }
+
+    
 
     onchangeHandler = (event, element) => {
         const updatedSignUpForm = {...this.state.signUpForm};
@@ -57,6 +59,7 @@ class SignUp extends Component {
         const updatedSignUpElement = {...updatedSignUpForm[element]};
 
         updatedSignUpElement.value = event.target.value;
+        updatedSignUpElement.errmsg = '';
 
         updatedSignUpForm[element] = updatedSignUpElement;
 
@@ -66,59 +69,49 @@ class SignUp extends Component {
     onSubmitHandler = (event) => {
         event.preventDefault();
         let passwordValue = this.state.signUpForm.password.value;
-        let confirmPassword = this.state.signUpForm.confirmPassword.value;
+        let confirmEmail = this.state.signUpForm.confirmEmail.value;
+        let email = this.state.signUpForm.email.value
 
         const copiedSignupForm = {...this.state.signUpForm};
         
-        if((passwordValue.length < 8) || ((passwordValue !== confirmPassword) && (passwordValue !== '' && confirmPassword !== ''))) {
+        if((passwordValue.length < 8) || (email !== confirmEmail)) {
             if(passwordValue.length < 8) {
-                const copiedpasswordConfig = copiedSignupForm.password;
+                const copiedpasswordConfig = {...copiedSignupForm.password};
                 copiedpasswordConfig.errmsg = 'Password must be up to 8 characters or more';
                 copiedSignupForm.password = copiedpasswordConfig;
                 this.setState({signUpForm: copiedSignupForm});
             }
-            else{
-                const copiedpasswordConfig = copiedSignupForm.password;
-                copiedpasswordConfig.errmsg = '';
-                copiedSignupForm.password = copiedpasswordConfig;
-                this.setState({signUpForm: copiedSignupForm});
-            }
     
-            if((passwordValue !== confirmPassword) && (passwordValue !== '' && confirmPassword !== '')) {
-                const copiedpasswordConfig = copiedSignupForm.confirmPassword;
-                copiedpasswordConfig.errmsg = 'Must match with Password';
-                copiedSignupForm.confirmPassword = copiedpasswordConfig;
+            if((email !== confirmEmail)) {
+                const copiedconfirmEmailConfig = {...copiedSignupForm.confirmEmail};
+                copiedconfirmEmailConfig.errmsg = 'Must match with Email';
+                copiedSignupForm.confirmEmail = copiedconfirmEmailConfig;
                 this.setState({signUpForm: copiedSignupForm});
             }
-            else {
-                const copiedpasswordConfig = copiedSignupForm.confirmPassword;
-                copiedpasswordConfig.errmsg = '';
-                copiedSignupForm.confirmPassword = copiedpasswordConfig;
-                this.setState({signUpForm: copiedSignupForm});
-            }
+            
         } else {
-            // let userData = {
-            //     "username": this.state.signUpForm.name.value,
-            //     "email": this.state.signUpForm.email.value,
-            //     "password1": this.state.signUpForm.password.value,
-            //     "password2": this.state.signUpForm.confirmPassword.value
-            // }
-            // console.log(userData)
-            // axios.post('https://restapi-4u.herokuapp.com/rest-auth/registration/', userData)
-            // .then((response) => {
-            //     console.log(response)
-            // })
-            // .catch((err) => {
-            //     console.log(err)
-            // })
-
-            axios.get('https://restapi-4u.herokuapp.com/')
+            let userData = {
+                "username": this.state.signUpForm.name.value,
+                "email": this.state.signUpForm.email.value,
+                "email2": this.state.signUpForm.confirmEmail.value,
+                "password": this.state.signUpForm.password.value
+            }
+            console.log(userData)
+            axios.post('https://restapi-4u.herokuapp.com/register/', userData)
             .then((response) => {
                 console.log(response)
             })
             .catch((err) => {
                 console.log(err)
             })
+
+            // axios.get('https://restapi-4u.herokuapp.com/')
+            // .then((response) => {
+            //     console.log(response)
+            // })
+            // .catch((err) => {
+            //     console.log(err)
+            // })
         }
 
         
@@ -146,7 +139,8 @@ class SignUp extends Component {
                             elementConfig = {formElement.config.elementConfig}
                             elementType = {formElement.config.elementType}
                             label = {formElement.id}
-                            errmsg = {formElement.config.errmsg}/>
+                            errmsg = {formElement.config.errmsg}
+                            />
                 })}
                     <div className = {classes.ButtonContainer}>
                         <Button>Sign Up</Button>
