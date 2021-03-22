@@ -31,6 +31,7 @@ const Input = (props) => {
         <div className = {classes.Input}>
             <label className = {classes.Label}> {props.label} </label>
             {inputElement}
+            <small className = {classes.Small}>{props.errmsg}</small>
         </div>
     );
 }

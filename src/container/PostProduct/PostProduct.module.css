@@ -1,0 +1,32 @@
+.formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProductForm {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    padding: 2em;
+    box-shadow: 4px 4px 19px rgba(0,0,0,0.1);
+    margin: 2em 0;
+    border-radius: 1em;
+}
+
+.ProductForm h2 {
+    color: #FB6D3A;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 0.2em;
+}
+
+.ButtonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ButtonContainer Button {
+    width: 15em;
+}

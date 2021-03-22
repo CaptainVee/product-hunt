@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import classes from './SignIn.module.css';
 import Input from '../../component/UI/Input/Input';
@@ -10,6 +11,15 @@ class SignIn extends Component {
     state = {
         signInForm: {
             username: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Username',
+                    required: true
+                },
+                value: ''
+            },
+            email: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'email',
@@ -40,6 +50,22 @@ class SignIn extends Component {
         this.setState({signInForm: copiedSignInForm});
     }
 
+    onSubmitHandler = (event) => {
+        event.preventDefault();
+        let loginDetails = {
+            username: this.state.signInForm.username.value,
+            email: this.state.signInForm.email.value,
+            password: this.state.signInForm.password.value
+        }
+        axios.post('https://restapi-4u.herokuapp.com/rest-auth/login', loginDetails)
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+
     render () {
 
         let formElements = [];
@@ -52,7 +78,7 @@ class SignIn extends Component {
         }
 
         let form = (
-            <form className = {classes.SignInForm}>
+            <form className = {classes.SignInForm} onSubmit = {this.onSubmitHandler}>
                 <h2>Sign In</h2>
                 {formElements.map((formElement) => {
                     return <Input key = {formElement.id} 
