@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { connect } from 'react-redux';
 
 import classes from './SignUp.module.css';
 import Input from '../../component/UI/Input/Input';
 import Button from '../../component/UI/Button/Button';
+import Spinner from '../../component/UI/Spinner/Spinner';
+import Aux from '../../hoc/Auxillary/Auxillary';
+import * as actions from '../../store/actions/index';
 
+toast.configure();
 class SignUp extends Component {
     state = {
         signUpForm: {
-            name: {
+            username: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
@@ -16,7 +24,8 @@ class SignUp extends Component {
                     required: true
                 },
                 value: '',
-                errmsg: ''
+                errmsg: '',
+                label: 'Username'
             },
             email: {
                 elementType: 'input',
@@ -26,9 +35,10 @@ class SignUp extends Component {
                     required: true
                 },
                 value: '',
-                errmsg: ''
+                errmsg: '',
+                label: 'Email'
             },
-            confirmEmail: {
+            email2: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'email',
@@ -36,7 +46,8 @@ class SignUp extends Component {
                     required: true
                 },
                 value: '',
-                errmsg: ''
+                errmsg: '',
+                label: 'Confirm Email'
             },
             password: {
                 elementType: 'input',
@@ -46,13 +57,14 @@ class SignUp extends Component {
                     required: true
                 },
                 value: '',
-                errmsg: ''
+                errmsg: '',
+                label: 'Password'
             }
-        }
+        },
+        loading: false
     }
 
     
-
     onchangeHandler = (event, element) => {
         const updatedSignUpForm = {...this.state.signUpForm};
 
@@ -69,7 +81,7 @@ class SignUp extends Component {
     onSubmitHandler = (event) => {
         event.preventDefault();
         let passwordValue = this.state.signUpForm.password.value;
-        let confirmEmail = this.state.signUpForm.confirmEmail.value;
+        let confirmEmail = this.state.signUpForm.email2.value;
         let email = this.state.signUpForm.email.value
 
         const copiedSignupForm = {...this.state.signUpForm};
@@ -91,18 +103,27 @@ class SignUp extends Component {
             
         } else {
             let userData = {
-                "username": this.state.signUpForm.name.value,
+                "username": this.state.signUpForm.username.value,
                 "email": this.state.signUpForm.email.value,
-                "email2": this.state.signUpForm.confirmEmail.value,
+                "email2": this.state.signUpForm.email2.value,
                 "password": this.state.signUpForm.password.value
             }
-            console.log(userData)
+            
+            this.setState({loading: true});
             axios.post('https://restapi-4u.herokuapp.com/register/', userData)
             .then((response) => {
-                console.log(response)
+                this.notify();
+                setTimeout(() => {
+                    this.setState({loading: false});
+                    this.props.onRedirect('./signin');
+                }, 5000)
             })
             .catch((err) => {
-                console.log(err)
+                this.setState({loading: false});
+                if(err.response.data) {
+                    this.errorHandler(err.response.data);
+                }
+                
             })
 
             // axios.get('https://restapi-4u.herokuapp.com/')
@@ -113,12 +134,22 @@ class SignUp extends Component {
             //     console.log(err)
             // })
         }
-
-        
     }
 
-    render () {
+    errorHandler = (errorObject) => {
+        for(let key in errorObject) {
+            const copiedSignUpForm = {...this.state.signUpForm};
+            const copiedFormElement = {...copiedSignUpForm[key]};
+            copiedFormElement.errmsg = errorObject[key];
+            copiedSignUpForm[key] = copiedFormElement;
+            this.setState({signUpForm: copiedSignUpForm});
+        }
+    }
 
+    notify = () => toast.success("REGISTRATION SUCCESSFUL!! ");
+
+
+    render () { 
         let formElement = [];
 
         for(let key in this.state.signUpForm) {
@@ -127,32 +158,59 @@ class SignUp extends Component {
                 config: this.state.signUpForm[key]
             })
         }
+        let formElements = null;
+        if(!this.state.loading) {
+            formElements = (<Aux>{formElement.map((formElement) => {
+                return <Input 
+                        key = {formElement.id}
+                        value = {formElement.config.value}
+                        changed = {(event) => this.onchangeHandler(event, formElement.id)}
+                        elementConfig = {formElement.config.elementConfig}
+                        elementType = {formElement.config.elementType}
+                        label = {formElement.config.label}
+                        errmsg = {formElement.config.errmsg}
+                        />
+                })}
+                <div className = {classes.ButtonContainer}>
+                    <Button>Sign Up</Button>
+                </div></Aux>)
+        } else {
+            formElements = <Spinner />
+        }
+       
 
         let form = (
             <form className = {classes.SignUpForm} onSubmit = {this.onSubmitHandler}>
                 <h2>Sign Up</h2>
-                {formElement.map((formElement) => {
-                    return <Input 
-                            key = {formElement.id}
-                            value = {formElement.config.value}
-                            changed = {(event) => this.onchangeHandler(event, formElement.id)}
-                            elementConfig = {formElement.config.elementConfig}
-                            elementType = {formElement.config.elementType}
-                            label = {formElement.id}
-                            errmsg = {formElement.config.errmsg}
-                            />
-                })}
-                    <div className = {classes.ButtonContainer}>
-                        <Button>Sign Up</Button>
-                    </div>
+                {formElements}
             </form>
         )
+
+        let redirect = null;
+        if(this.props.redirected) {
+            redirect = <Redirect to = {this.props.redirectlink}/>
+        }
         return (
             <div className = {classes.SignUpContainer}>
+                {redirect}
                 {form}
+                <ToastContainer />
             </div>
         );
     }
 }
 
-export default SignUp;
+const mapStateToProps = state => {
+    return {
+        redirectlink: state.redirectLink,
+        redirected: state.redirected
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onRedirect: (link) => dispatch(actions.redirect(link))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
