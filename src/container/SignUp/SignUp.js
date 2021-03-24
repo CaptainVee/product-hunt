@@ -95,9 +95,9 @@ class SignUp extends Component {
             }
     
             if((email !== confirmEmail)) {
-                const copiedconfirmEmailConfig = {...copiedSignupForm.confirmEmail};
+                const copiedconfirmEmailConfig = {...copiedSignupForm.email2};
                 copiedconfirmEmailConfig.errmsg = 'Must match with Email';
-                copiedSignupForm.confirmEmail = copiedconfirmEmailConfig;
+                copiedSignupForm.email2 = copiedconfirmEmailConfig;
                 this.setState({signUpForm: copiedSignupForm});
             }
             

@@ -179,10 +179,10 @@ class PostProduct extends Component {
         })
         .then((response) => {
             this.notify();
+            this.setState({loading: false})
             setTimeout(() => {
-                this.setState({loading: false})
                 this.props.onRedirect('/')
-            },5000)
+            },4000)
         })
         .catch((error) => {
             console.log(error)

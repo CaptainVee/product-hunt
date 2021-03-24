@@ -79,8 +79,9 @@ class SignIn extends Component {
         }
         axios.post('https://restapi-4u.herokuapp.com/login/', loginDetails)
         .then((response) => {
+            localStorage.setItem('userId', response.data.id);
             localStorage.setItem('token', response.data.token);
-            this.props.onAuthSuccessfull(response.data.token);
+            this.props.onAuthSuccessfull(response.data.token, response.data.id);
             this.setState({loading: false});
             this.props.onRedirect('/');
         })
@@ -155,7 +156,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onRedirectReset: () => dispatch(actions.resetRedirect()),
         onRedirect: (path) => dispatch(actions.redirect(path)),
-        onAuthSuccessfull: ( token ) => dispatch(actions.authSuccessful(token)),
+        onAuthSuccessfull: ( token, id ) => dispatch(actions.authSuccessful(token, id)),
     }
     
 }

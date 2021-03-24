@@ -8,12 +8,13 @@ import { connect } from 'react-redux';
 import { Route, Switch} from 'react-router-dom';
 import SignIn from './container/SignIn/SignIn';
 import * as actions from './store/actions/index';
+import Profile from './container/Profile/Profile';
 
 class App extends Component {
   componentDidMount() {
-    if(localStorage.getItem('token')){
+    if(localStorage.getItem('token') && localStorage.getItem('userId')){
       if(this.props.token === '') {
-        this.props.onAuthSuccessful(localStorage.getItem('token'))
+        this.props.onAuthSuccessful(localStorage.getItem('token'), localStorage.getItem('userId'));
       }
     }else{
       this.props.onAuthFail();
@@ -24,6 +25,7 @@ class App extends Component {
       <div>
          <Layout>
             <Switch>
+              <Route path = '/profile' component = {Profile}/>
               <Route path = '/post-product' component = {PostProduct} />
               <Route path = '/signup' component = {SignUp}/>
               <Route path = '/signin' component = {SignIn}/>
@@ -43,7 +45,7 @@ const mapStateToProps = state => {
   
 const mapDispatchToProps = dispatch => {
   return {
-    onAuthSuccessful: (token) => dispatch(actions.authSuccessful(token)),
+    onAuthSuccessful: (token, id) => dispatch(actions.authSuccessful(token, id)),
     onAuthFail: () => dispatch(actions.authFail())
   }
 }

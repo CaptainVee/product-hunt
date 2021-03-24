@@ -1,0 +1,87 @@
+.Profile {
+    display: flex;
+    flex-direction: column;
+    padding: 2em 8em;
+    width: 100%;
+}
+
+.ProfileHeader {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+    background-color: white;
+    height: 18em;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 4em;
+}
+
+.ProfileInfo {
+    display: flex;
+    height: 15em;
+    background-color: #503E9D;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    padding: 2em;
+    align-items: center;
+}
+
+.ImagePlaceHolder {
+    height: 10em;
+    width: 10em;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 6px solid white;
+    background-color: #FB6D3A;
+}
+
+.UserImage {
+    height: 10em;
+    width: 10em;
+    border-radius: 50%;
+}
+
+.ImagePlaceHolder h2 {
+    color: white;
+    font-weight: 700;
+    font-size: 5rem;
+}
+
+.UserPersonalInfo {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2em;
+}
+
+.UserPersonalInfo h2 {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 2rem;
+}
+
+.UserPersonalInfo h3 {
+    color: white;
+    font-size: 1.4em;
+}
+
+.ProfileActivity {
+    display: flex;
+    align-items: center;
+    height: 3em;
+    padding-left: 3em;
+}
+
+.ProfileActivity p {
+    text-align: center;
+}
+
+.ProfileActivity h3 {
+    color: #FB6D3A;
+}
+
+.ProductLength {
+    margin-top: -1.3em;
+    margin-bottom: 0.8em;
+}

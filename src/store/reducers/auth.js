@@ -4,6 +4,7 @@ const initialState = {
     redirectLink: '/',
     redirected: false,
     token: '',
+    userId: '',
     authenticated: false
 }
 
@@ -26,7 +27,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 token: action.token,
-                authenticated: true
+                authenticated: true,
+                userId: action.userId
             }
         case actionTypes.AUTH_FAIL:
             return {

@@ -13,10 +13,11 @@ export const resetRedirect = (  ) => {
     }
 }
 
-export const authSuccessful = ( token ) => {
+export const authSuccessful = ( token, id ) => {
     return {
         type: actionTypes.AUTH_SUCCESSFUL,
-        token: token
+        token: token,
+        userId: id
     }
 }
 
