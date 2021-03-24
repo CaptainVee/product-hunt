@@ -8,7 +8,13 @@
     align-items: center;
     cursor: pointer;
     height: 12em;
-    margin-bottom: 2em;;
+    margin-bottom: 2em;
+    background-color: white;
+    transition: background-color 1s ease-in-out;
+}
+
+.Product:hover {
+    background-color: rgba(0,0,0,0.05);
 }
 
 .ProductImgCountainer {
@@ -24,13 +30,52 @@
     max-width: 100%;
 }
 
+.Initial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FB6D3A;
+    border-radius: 1em;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+    width: 100%;
+    height: 10em;
+}
+
+.Initial h2 {
+    color: white;
+    text-transform: uppercase;
+    font-size: 5rem;
+    font-weight: 900;
+}
+
 .ProductInfo {
     display: flex;
     flex-direction: column;
     width: 70%;
-    margin-left: 1em;
+    margin-left: 2em;
     justify-content: space-between;
     height: 10em;
+}
+
+.Title {
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    color: #FB6D3A;
+}
+
+.Caption {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.Number {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.Topics {
+    font-weight: 500;
+    font-size: 1.4rem;
 }
 
 .ProductCommentSection {
@@ -57,6 +102,12 @@
     height: 5em;
     width: 8%;
     border-radius: 5px;
+    background-color: white;
+    transition: background-color 1s ease-in-out;
+}
+
+.ProductVote:hover {
+    background-color: rgba(0,0,0,0.05);
 }
 
 .ProductVote img {

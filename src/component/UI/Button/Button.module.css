@@ -10,3 +10,11 @@
     font-size: 1.2rem;
     cursor: pointer;
 }
+
+.Button:focus {
+    box-shadow: 4px 4px 5px rgba(0,0,0,0.2);
+}
+
+.Button:hover{
+    box-shadow: 4px 4px 5px rgba(0,0,0,0.2);   
+}

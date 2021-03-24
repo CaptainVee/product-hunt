@@ -13,6 +13,11 @@
     font-size: 1.2rem;
 }
 
+.InputElement:focus {
+    box-shadow: 4px 4px 5px rgba(0,0,0,0.2);
+    border: 1px solid rgba(0,0,0,0.2)
+}
+
 .Label {
     font-weight: 600;
     text-transform: uppercase;
