@@ -115,15 +115,6 @@ class PostProduct extends Component {
         loading: false
     }
 
-    componentDidMount() {
-        axios.get('https://restapi-4u.herokuapp.com/product/1/detail/')
-        .then((response) => {
-            console.log(response);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    }
     onchangeHandler = (event, element) => {
         const copiedProductForm = {...this.state.productForm}
         const copiedProductElement = {...copiedProductForm[element]}

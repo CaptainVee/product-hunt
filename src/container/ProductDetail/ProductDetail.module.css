@@ -1,0 +1,120 @@
+.ProductDetail {
+    display: flex;
+    flex-direction: column;
+    padding: 3em 8em;
+    width: 100%;
+}
+
+.ProductDetailHeader {
+    display: flex;
+    height: 10em;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em;
+    border-radius: 1em;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+    margin-bottom: 2em;
+}
+
+.ProductHeaderInfo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.ImageContainer {
+    height: 8em;
+    width: 8em;
+    margin-right: 1em;
+}
+
+.ImageContainer img {
+    height: 8em;
+    max-width: 100%;
+    border-radius: 4px;
+}
+
+.ProductInfo h1 {
+    color: #FB6D3A;
+}
+
+.Caption {
+    font-size: 1.2rem;
+    color: rgb(151, 149, 149);
+}
+
+.TopicContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 0.7em;
+}
+
+.Topic {
+    display: block;
+    font-size: 0.9rem;
+    padding: 0.3em 0.9em;
+    background-color:  rgba(43, 40, 40, 0.1);
+    border-radius: 4px;
+    color: rgb(134, 130, 130);
+}
+
+.UpvoteContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FB6D3A;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    padding: 1.3em 2em;
+}
+
+.UpvoteContainer img {
+    height: 1em;
+    width: 1em;
+    margin-right: 0.5em;
+}
+
+.UpvoteContainer p{
+    margin-right: 1em;
+}
+
+.ProductDescriptionSection {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.8em;
+    padding: 2em;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.12);
+    margin-bottom: 2em;
+}
+
+.ProductFonderSection {
+    margin-bottom: 0.5em;
+}
+
+.ProductFonderSection {
+    text-transform: uppercase;
+    color: #FB6D3A;
+    letter-spacing: 2px;
+}
+
+.ProductDescription p {
+    text-align: justify;
+}
+
+.CommentSectionContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.CommentSectionContainer h2 {
+    color: #FB6D3A;
+    text-transform: uppercase;
+}
+
+.comments p {
+    text-align: justify;
+    font-size: 0.8rem;
+    margin-bottom: 0.5em;
+}

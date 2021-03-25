@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import classes from './NavBar.module.css';
 import NavItems from './NavItems/NavItems';
+import NavItem from '../NavBar/NavItems/NavItem/NavItem';
 import NavButton from './NavItems/NavButton/NavButton';
 
 
@@ -14,6 +15,14 @@ const NavBar = (props) => {
             <div className = {classes.NavButtons}>
                 <NavButton link = '/signin' styleName = 'SignIn'>Sign In</NavButton>
                 <NavButton link = '/signup' styleName = 'SignUp'>Sign Up</NavButton>
+            </div>
+        )
+    }
+
+    else {
+        otherSide = (
+            <div>
+                <NavItem link = 'profile'>Profile</NavItem>
             </div>
         )
     }

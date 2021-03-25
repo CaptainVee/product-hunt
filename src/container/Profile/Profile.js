@@ -52,6 +52,69 @@ class Profile extends Component {
             }
         }
     }
+
+    upvoteStatus = (productId, userId) => {
+        let productIndex = this.state.userInfo.product.findIndex((product) => {
+            return product.id === productId;
+        })
+        let upvoteStatus = this.state.userInfo.product[productIndex].upvoters.some((user) => {
+            return user.id === userId;
+        })
+        return upvoteStatus;
+    }
+
+    upvoteHandler = ( productId, token, authenticatedStatus, userId ) => {
+        if( authenticatedStatus ) {
+            axios.post(`https://restapi-4u.herokuapp.com/upvote/${productId}/`, null, {
+                headers: {
+                    Authorization: `token ${token}`
+                }
+            })
+            .then((response) => {
+                console.log(response)
+                this.upVotedUpdateHandler(productId, userId);
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+    } 
+
+    upVotedUpdateHandler = (productId, userId) => {
+        let copiedState = {...this.state.userInfo}
+        let copiedProductArray = [...copiedState.product];
+        let indexOfProduct = copiedProductArray.findIndex((product) => {
+            return product.id === productId;
+        })
+        
+        let upVoteChecker = copiedProductArray[indexOfProduct].upvoters.some((user) => {
+            return user.id === +userId
+        })
+
+        if(upVoteChecker) {
+            let newUpVoters = copiedProductArray[indexOfProduct].upvoters.filter((user) => {
+                if(user.id === +userId){
+                    copiedProductArray[indexOfProduct].total_upvotes = copiedProductArray[indexOfProduct].total_upvotes - 1;
+                    return false
+                }
+                else {
+                    return user;
+                }
+            })
+            copiedProductArray[indexOfProduct].upvoters = newUpVoters;
+            copiedState.product = copiedProductArray
+            this.setState({userInfo: copiedState});
+        }
+        else{
+            copiedProductArray[indexOfProduct].total_upvotes = copiedProductArray[indexOfProduct].total_upvotes + 1;
+            let newUpVoters = [...copiedProductArray[indexOfProduct].upvoters];
+            newUpVoters.push({id: userId});
+            copiedProductArray[indexOfProduct].upvoters = newUpVoters;
+            copiedState.product = copiedProductArray
+            this.setState({userInfo: copiedState});
+        }
+        
+    }
     render () {
         let profileBody = <Spinner />
 
@@ -73,6 +136,8 @@ class Profile extends Component {
                             topics = {this.topicsHandler(product.topics[0])}
                             total_upvotes = {product.total_upvotes}
                             comments = {product.comments}
+                            upvoted = {() => this.upvoteHandler(product.id, this.props.token, this.props.authenticated, +this.props.userId)}
+                            upvoteStatus = {this.upvoteStatus(product.id,  +this.props.userId)}
                             />
                         );
                     })}
@@ -114,7 +179,9 @@ class Profile extends Component {
 
 const mapStateToProps = state => {
     return {
-        userId: state.userId
+        userId: state.userId,
+        token: state.token,
+        authenticated: state.authenticated
     }
 }
 

@@ -9,6 +9,7 @@ import { Route, Switch} from 'react-router-dom';
 import SignIn from './container/SignIn/SignIn';
 import * as actions from './store/actions/index';
 import Profile from './container/Profile/Profile';
+import ProductDetail from './container/ProductDetail/ProductDetail';
 
 class App extends Component {
   componentDidMount() {
@@ -25,6 +26,7 @@ class App extends Component {
       <div>
          <Layout>
             <Switch>
+              <Route path = '/product-detail' component = {ProductDetail} />
               <Route path = '/profile' component = {Profile}/>
               <Route path = '/post-product' component = {PostProduct} />
               <Route path = '/signup' component = {SignUp}/>

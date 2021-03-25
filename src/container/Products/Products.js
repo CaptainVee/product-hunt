@@ -18,8 +18,6 @@ class Products extends Component {
         axios.get('https://restapi-4u.herokuapp.com')
         .then(response => {
             console.log(response);
-            // const updatedProducts = [...this.state.products];
-            // updatedProducts = response.data;
             this.setState({products: response.data});
             this.setState({loading: false})
         }) 
@@ -103,15 +101,6 @@ class Products extends Component {
         
     }
 
-    upVotersSpliceHandler = ( upVotersArray, userId ) => {
-        let copiedUpvotersArray = [...upVotersArray];
-        let userIdIndex = copiedUpvotersArray.findIndex((usersId) => {
-            return usersId === userId
-        })
-
-        let newCopiedUserArray = copiedUpvotersArray.splice(userIdIndex, 1);
-        return newCopiedUserArray;
-    }
 
 
     render () {
