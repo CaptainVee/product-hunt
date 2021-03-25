@@ -7,21 +7,32 @@ import Comment from '../../assets/comment.svg';
 import Arrow_Up from '../../assets/arrow_up.svg';
 
 const Product = (props) => {
-    const initilaHanhler = (initial) => {
-         let [firstInitial] = initial;
-         return firstInitial;
+
+    let upVoteclasses = [classes.ProductVote]
+
+    if(props.upvoteStatus) {
+        if(upVoteclasses.length === 2) {
+            let newUpvoteClasses = upVoteclasses.splice(1,1);
+            newUpvoteClasses.push(classes.ProductUpVoted);
+            upVoteclasses = newUpvoteClasses;
+        }else {
+            upVoteclasses.push(classes.ProductUpVoted);
+        }
     }
-    let newThumbnail = null;
-    if(props.thumbnail ){
-        newThumbnail = (<div className = {classes.Initial}>
-            <h2>{initilaHanhler(props.title)}</h2>
-        </div>)
-    }   
+    else {
+        if(upVoteclasses.length === 2) {
+            let newUpvoteClasses = upVoteclasses.splice(1,1);
+            newUpvoteClasses.push(classes.NotProductUpVoted);
+            upVoteclasses = newUpvoteClasses;
+        }else {
+            upVoteclasses.push(classes.NotProductUpVoted);
+        }
+    }
+      
     return (
         <div className = {classes.Product}>
                 <div className = {classes.ProductImgCountainer}>
-                    {/* <img src = {props.thumbnail} alt = 'Product'/> */}
-                    {newThumbnail}
+                    <img src = {`https://restapi-4u.herokuapp.com${props.thumbnail}`} alt = 'Product'/>
                 </div>
                 <div className = {classes.ProductInfo}>
                     <div>
@@ -38,7 +49,7 @@ const Product = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className = {classes.ProductVote} onClick = {props.upvoted}>
+                <div className = {upVoteclasses.join(' ')} onClick = {props.upvoted}>
                     <img src={Arrow_Up} alt = "Vote"/>
                     <p className = {classes.Number}>{props.total_upvotes}</p>
                 </div>     

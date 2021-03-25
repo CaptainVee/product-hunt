@@ -43,6 +43,76 @@ class Products extends Component {
         }
     }
 
+    upvoteHandler = ( productId, token, authenticatedStatus, userId ) => {
+        if( authenticatedStatus ) {
+            axios.post(`https://restapi-4u.herokuapp.com/upvote/${productId}/`, null, {
+                headers: {
+                    Authorization: `token ${token}`
+                }
+            })
+            .then((response) => {
+                console.log(response)
+                this.upVotedUpdateHandler(productId, userId);
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+    } 
+
+    upvoteStatus = (productId, userId) => {
+        let productIndex = this.state.products.findIndex((product) => {
+            return product.id === productId;
+        })
+        let upvoteStatus = this.state.products[productIndex].upvoters.some((user) => {
+            return user.id === userId;
+        })
+        return upvoteStatus;
+    }
+
+    upVotedUpdateHandler = (productId, userId) => {
+        let copiedProductArray = [...this.state.products];
+        let indexOfProduct = copiedProductArray.findIndex((product) => {
+            return product.id === productId;
+        })
+        
+        let upVoteChecker = copiedProductArray[indexOfProduct].upvoters.some((user) => {
+            return user.id === +userId
+        })
+
+        if(upVoteChecker) {
+            let newUpVoters = copiedProductArray[indexOfProduct].upvoters.filter((user) => {
+                if(user.id === +userId){
+                    copiedProductArray[indexOfProduct].total_upvotes = copiedProductArray[indexOfProduct].total_upvotes - 1;
+                    return false
+                }
+                else {
+                    return user;
+                }
+            })
+            copiedProductArray[indexOfProduct].upvoters = newUpVoters;
+            this.setState({products: copiedProductArray});
+        }
+        else{
+            copiedProductArray[indexOfProduct].total_upvotes = copiedProductArray[indexOfProduct].total_upvotes + 1;
+            let newUpVoters = [...copiedProductArray[indexOfProduct].upvoters];
+            newUpVoters.push({id: userId});
+            copiedProductArray[indexOfProduct].upvoters = newUpVoters;
+            this.setState({products: copiedProductArray});
+        }
+        
+    }
+
+    upVotersSpliceHandler = ( upVotersArray, userId ) => {
+        let copiedUpvotersArray = [...upVotersArray];
+        let userIdIndex = copiedUpvotersArray.findIndex((usersId) => {
+            return usersId === userId
+        })
+
+        let newCopiedUserArray = copiedUpvotersArray.splice(userIdIndex, 1);
+        return newCopiedUserArray;
+    }
+
 
     render () {
 
@@ -58,7 +128,9 @@ class Products extends Component {
                          thumbnail = {product.thumbnail}
                          topics = {this.topicsHandler(product.topics[0])}
                          total_upvotes = {product.total_upvotes}
-                         comments = {product.comments}/>
+                         comments = {product.comments}
+                         upvoted = {() => this.upvoteHandler(product.id, this.props.token, this.props.authenticated, +this.props.userId)}
+                         upvoteStatus = {this.upvoteStatus(product.id,  +this.props.userId)}/>
                     )
                 })}
             </div>)
@@ -72,10 +144,18 @@ class Products extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        token: state.token,
+        authenticated: state.authenticated,
+        userId: state.userId
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         onResetRedirected: () => dispatch(actions.resetRedirect())
     }
 }
 
-export default connect(null, mapDispatchToProps)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

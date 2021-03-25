@@ -72,7 +72,8 @@ class Profile extends Component {
                             thumbnail = {product.thumbnail}
                             topics = {this.topicsHandler(product.topics[0])}
                             total_upvotes = {product.total_upvotes}
-                            comments = {product.comments}/>
+                            comments = {product.comments}
+                            />
                         );
                     })}
                 </Aux>

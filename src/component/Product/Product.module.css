@@ -7,7 +7,7 @@
     box-shadow: 4px 4px 18px rgba(0,0,0,0.2);
     align-items: center;
     cursor: pointer;
-    height: 12em;
+    height: 10em;
     margin-bottom: 2em;
     background-color: white;
     transition: background-color 1s ease-in-out;
@@ -19,33 +19,14 @@
 
 .ProductImgCountainer {
     display: flex;
-    height: 10em;
+    height: 8em;
     width: 15%;
     align-items: center;
-    height: 12em;
 }
 
 .ProductImgCountainer img {
-    height: 10em;
+    height: 8em;
     max-width: 100%;
-}
-
-.Initial {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #FB6D3A;
-    border-radius: 1em;
-    box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
-    width: 100%;
-    height: 10em;
-}
-
-.Initial h2 {
-    color: white;
-    text-transform: uppercase;
-    font-size: 5rem;
-    font-weight: 900;
 }
 
 .ProductInfo {
@@ -54,28 +35,28 @@
     width: 70%;
     margin-left: 2em;
     justify-content: space-between;
-    height: 10em;
+    height: 8em;
 }
 
 .Title {
     text-transform: uppercase;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     color: #FB6D3A;
 }
 
 .Caption {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
 .Number {
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .Topics {
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 1rem;
 }
 
 .ProductCommentSection {
@@ -98,12 +79,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgb(168, 166, 166);
     height: 5em;
     width: 8%;
     border-radius: 5px;
     background-color: white;
     transition: background-color 1s ease-in-out;
+}
+
+.NotProductUpVoted {
+    border: 1px solid rgb(168, 166, 166);
+}
+
+.ProductUpVoted {
+    border: 1px solid #FB6D3A;
 }
 
 .ProductVote:hover {

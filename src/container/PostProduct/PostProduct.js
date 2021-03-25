@@ -115,7 +115,15 @@ class PostProduct extends Component {
         loading: false
     }
 
-
+    componentDidMount() {
+        axios.get('https://restapi-4u.herokuapp.com/product/1/detail/')
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
     onchangeHandler = (event, element) => {
         const copiedProductForm = {...this.state.productForm}
         const copiedProductElement = {...copiedProductForm[element]}
@@ -178,11 +186,9 @@ class PostProduct extends Component {
             
         })
         .then((response) => {
-            this.notify();
             this.setState({loading: false})
-            setTimeout(() => {
-                this.props.onRedirect('/')
-            },4000)
+            this.notify();
+            this.props.onRedirect('/?id=12')
         })
         .catch((error) => {
             console.log(error)
