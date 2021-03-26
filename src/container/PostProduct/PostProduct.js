@@ -86,8 +86,7 @@ class PostProduct extends Component {
             thumbnail: {
                 elementType: 'input',
                 elementConfig: {
-                    type: 'file',
-                    placeholder: 'Product Thumbnail'
+                    type: 'file'
                 },
                 value: '',
                 image: null,
@@ -177,17 +176,30 @@ class PostProduct extends Component {
             
         })
         .then((response) => {
+            this.thumbnailResetHandler();
             this.setState({loading: false})
             this.notify();
             this.props.onRedirect('/?id=12')
         })
         .catch((error) => {
+            this.thumbnailResetHandler();
             console.log(error)
             this.setState({loading: false})
         })
     }
 
     notify = () => toast.success("Product Successfully Created!! ");
+
+    thumbnailResetHandler = () => {
+        const copiedProductFormState = {...this.state.productForm};
+
+        const copiedThumbnail = copiedProductFormState.thumbnail;
+        copiedThumbnail.image = null;
+        copiedThumbnail.value = '';
+
+        copiedProductFormState.thumbnail = copiedThumbnail;
+        this.setState({productForm: copiedProductFormState});
+    }
 
     render () {
 
