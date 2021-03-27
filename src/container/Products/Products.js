@@ -108,23 +108,91 @@ class Products extends Component {
 
         let productBody = null;
 
-        if(!this.state.loading) {
-            productBody = (<div className = {classes.Products}>
-                     {this.state.products.map((product) => {
+        const dateFormater = (fullDate) => {
+            let date = new Date(fullDate).getDate();
+            let month = new Date(fullDate).getMonth();
+            let year = new Date(fullDate).getFullYear();
+
+            if(date < 10) {
+                date = `0${date}`;
+            }
+
+            if(month < 10) {
+                month = `0${month}`
+            }
+
+            return `${year}-${month}-${date}`;
+        }
+
+        const productsLaunchDate = []
+
+        const dateDisplayHandler = (fullDate) => {
+            const monthArray = ['Janaury', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            let date = new Date(fullDate).getDate();
+            let month = new Date(fullDate).getMonth() + 1;
+            let year = new Date(fullDate).getFullYear();
+
+            let todayDate = new Date().getDate();
+            let todayMonth = new Date().getMonth();
+            let todayYear = new Date().getFullYear();
+
+            if((date === todayDate) && (month === todayMonth) && (year === todayYear)) {
+                return 'Today';
+            }
+            else if(year === todayYear) {
+                return `${date} ${monthArray[month]}`;
+            }
+            else {
+                return `${date} ${monthArray[month]}, ${year}`;
+            }
+        }
+
+        this.state.products.forEach((product) => {
+            let fulldate = dateFormater(product.launch_date);
+            if(!productsLaunchDate.includes(fulldate)){
+                productsLaunchDate.push(fulldate);
+            }
+
+        })
+
+        const ProductBodyFunction = () => {
+            let sortedProductBody = <div className = {classes.Products}>
+                {productsLaunchDate.reverse().map((date) => {
                     return (
-                        <Product key = {product.id}
-                         title = {product.name}
-                         caption = {product.caption}
-                         thumbnail = {product.thumbnail}
-                         topics = {this.topicsHandler(product.topics[0])}
-                         total_upvotes = {product.total_upvotes}
-                         comments = {product.comments}
-                         upvoted = {(event) => this.upvoteHandler(product.id, this.props.token, this.props.authenticated, +this.props.userId, event)}
-                         upvoteStatus = {this.upvoteStatus(product.id,  +this.props.userId)}
-                         id = {product.id} {...this.props}/>
+                        <Aux key = {date}>
+                            <h2 className = {classes.Date}>{dateDisplayHandler(date)}</h2>
+                            {productLooPFunction(date)}
+                        </Aux>
                     )
                 })}
-            </div>)
+            </div>
+            return sortedProductBody
+        }
+
+        const productLooPFunction = (date) => {
+            const productFilteredbyDate = this.state.products.filter((product) => {
+                return date === dateFormater(product.launch_date)
+            })
+            const productsMapbyDate = productFilteredbyDate.map((product) => {
+                return (
+                    <Product key = {product.id}
+                     title = {product.name}
+                     caption = {product.caption}
+                     thumbnail = {product.thumbnail}
+                     topics = {this.topicsHandler(product.topics[0])}
+                     total_upvotes = {product.total_upvotes}
+                     comments = {product.comments}
+                     upvoted = {(event) => this.upvoteHandler(product.id, this.props.token, this.props.authenticated, +this.props.userId, event)}
+                     upvoteStatus = {this.upvoteStatus(product.id,  +this.props.userId)}
+                     id = {product.id} {...this.props}/>
+                )
+            })
+
+            return productsMapbyDate;
+        }
+
+        if(!this.state.loading) {
+            productBody = ProductBodyFunction();
         }
         else {
             productBody = <Spinner />

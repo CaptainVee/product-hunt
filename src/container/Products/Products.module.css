@@ -4,6 +4,10 @@
     padding: 3em 8em;
     width: 100%;
     box-sizing: border-box;
-    justify-content: center;
-    align-items: center;
+}
+
+.Date {
+    border-bottom: 1px solid rgb(173, 170, 170);
+    margin-bottom: 1em;
+    padding-bottom: 0.3em;
 }
