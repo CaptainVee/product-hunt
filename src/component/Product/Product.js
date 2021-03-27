@@ -2,37 +2,19 @@ import React from 'react';
 
 
 import classes from './Product.module.css';
-// import ProductImage from '../../assets/mug.jpg';
 import Comment from '../../assets/comment.svg';
-import Arrow_Up from '../../assets/arrow_up.svg';
+import Upvote from '../Upvote/Upvote';
 
 const Product = (props) => {
 
-    let upVoteclasses = [classes.ProductVote]
-
-    if(props.upvoteStatus) {
-        if(upVoteclasses.length === 2) {
-            let newUpvoteClasses = upVoteclasses.splice(1,1);
-            newUpvoteClasses.push(classes.ProductUpVoted);
-            upVoteclasses = newUpvoteClasses;
-        }else {
-            upVoteclasses.push(classes.ProductUpVoted);
-        }
-    }
-    else {
-        if(upVoteclasses.length === 2) {
-            let newUpvoteClasses = upVoteclasses.splice(1,1);
-            newUpvoteClasses.push(classes.NotProductUpVoted);
-            upVoteclasses = newUpvoteClasses;
-        }else {
-            upVoteclasses.push(classes.NotProductUpVoted);
-        }
+    const productDetailRedirect = (productId) => {
+        props.history.push(`/product-detail/${productId}`)
     }
       
     return (
-        <div className = {classes.Product}>
+        <div className = {classes.Product} onClick = {() => productDetailRedirect(props.id) }>
                 <div className = {classes.ProductImgCountainer}>
-                    <img src = {`https://restapi-4u.herokuapp.com${props.thumbnail}`} alt = 'Product'/>
+                    <img src = {`${props.thumbnail}`} alt = 'Product'/>
                 </div>
                 <div className = {classes.ProductInfo}>
                     <div>
@@ -49,12 +31,14 @@ const Product = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className = {upVoteclasses.join(' ')} onClick = {props.upvoted}>
+            <Upvote upvoted = {props.upvoted} total_upvotes = {props.total_upvotes} upvoteStatus = {props.upvoteStatus}/>
+                {/* <div className = {upVoteclasses.join(' ')} onClick = {props.upvoted}>
                     <img src={Arrow_Up} alt = "Vote"/>
                     <p className = {classes.Number}>{props.total_upvotes}</p>
-                </div>     
+                </div>      */}
             </div>
     );
 }
+
 
 export default Product;

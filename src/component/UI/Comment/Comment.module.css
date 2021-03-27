@@ -1,0 +1,9 @@
+.Comment {
+    display: flex;
+    flex-direction: column;
+}
+
+.comentHeader {
+    display: flex;
+    align-items: center;
+}

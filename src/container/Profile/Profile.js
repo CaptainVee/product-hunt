@@ -63,7 +63,8 @@ class Profile extends Component {
         return upvoteStatus;
     }
 
-    upvoteHandler = ( productId, token, authenticatedStatus, userId ) => {
+    upvoteHandler = ( productId, token, authenticatedStatus, userId, event ) => {
+        event.stopPropagation();
         if( authenticatedStatus ) {
             axios.post(`https://restapi-4u.herokuapp.com/upvote/${productId}/`, null, {
                 headers: {
@@ -136,8 +137,10 @@ class Profile extends Component {
                             topics = {this.topicsHandler(product.topics[0])}
                             total_upvotes = {product.total_upvotes}
                             comments = {product.comments}
-                            upvoted = {() => this.upvoteHandler(product.id, this.props.token, this.props.authenticated, +this.props.userId)}
+                            upvoted = {(event) => this.upvoteHandler(product.id, this.props.token, this.props.authenticated, +this.props.userId, event)}
                             upvoteStatus = {this.upvoteStatus(product.id,  +this.props.userId)}
+                            id = {product.id}
+                            {...this.props}
                             />
                         );
                     })}

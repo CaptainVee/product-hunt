@@ -22,7 +22,7 @@ const NavBar = (props) => {
     else {
         otherSide = (
             <div>
-                <NavItem link = 'profile'>Profile</NavItem>
+                <NavItem link = '/profile'>Profile</NavItem>
             </div>
         )
     }

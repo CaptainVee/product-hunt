@@ -3,12 +3,11 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Redirect } from 'react-router-dom';
+
 
 import Input from '../../component/UI/Input/Input';
 import Button from '../../component/UI/Button/Button';
 import classes from './PostProduct.module.css';
-import * as actions from '../../store/actions/index';
 import Spinner from '../../component/UI/Spinner/Spinner';
 import Aux from '../../hoc/Auxillary/Auxillary';
 
@@ -179,7 +178,7 @@ class PostProduct extends Component {
             this.thumbnailResetHandler();
             this.setState({loading: false})
             this.notify();
-            this.props.onRedirect('/?id=12')
+            this.props.history.push(`/product-detail/${response.data.id}`)
         })
         .catch((error) => {
             this.thumbnailResetHandler();
@@ -244,13 +243,8 @@ class PostProduct extends Component {
             </form>
         )
 
-        let redirectLink = null;
-        if(this.props.redirected) {
-            redirectLink = <Redirect to ={this.props.redirectPath}/>
-        }
         return (
             <div className = {classes.formContainer}>
-                {redirectLink}
                 {form}
             </div>
         );
@@ -259,16 +253,9 @@ class PostProduct extends Component {
 
 const mapStateToProps = state => {
     return {
-        token: state.token,
-        redirectPath: state.redirectLink,
-        redirected: state.redirected
+        token: state.token
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onRedirect: (path) => dispatch(actions.redirect(path))
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostProduct);
+export default connect(mapStateToProps)(PostProduct);

@@ -26,12 +26,12 @@ class App extends Component {
       <div>
          <Layout>
             <Switch>
-              <Route path = '/product-detail' component = {ProductDetail} />
-              <Route path = '/profile' component = {Profile}/>
+              <Route path = '/profile' exact component = {Profile}/>
               <Route path = '/post-product' component = {PostProduct} />
               <Route path = '/signup' component = {SignUp}/>
               <Route path = '/signin' component = {SignIn}/>
               <Route path = '/' exact component = {Products}/>
+              <Route path = '/product-detail/:id' exact component = {ProductDetail}/>
             </Switch>
         </Layout>
       </div>
