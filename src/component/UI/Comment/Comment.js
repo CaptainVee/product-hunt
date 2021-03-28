@@ -30,7 +30,8 @@ const Comment = (props) => {
                 <p className = {classes.Date}>{dateFormater(props.date)}</p>
             </div>
             <p className = {classes.CommentContent}>{props.content}</p>
-            <small className = {classes.Reply}>Reply</small>
+            <small className = {classes.Reply} onClick = {props.reply}>Reply {`(${props.replies})`}</small>
+            <div>{props.children}</div>
         </div>
     )
 }

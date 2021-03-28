@@ -10,6 +10,8 @@ import Button from '../../component/UI/Button/Button';
 import * as actions from '../../store/actions/index';
 import Spinner from '../../component/UI/Spinner/Spinner';
 import Comment from '../../component/UI/Comment/Comment';
+import Reply from '../../component/UI/Reply/Reply';
+import Aux from '../../hoc/Auxillary/Auxillary';
 
 class ProductDetail extends Component {
 
@@ -28,7 +30,16 @@ class ProductDetail extends Component {
             },
             value: '',
         },
-        loading: false
+        replyForm : {
+            elementType: 'textarea',
+            elementConfig: {
+                placeholder: 'Reply',
+                required: true
+            },
+            value: '',
+        },
+        loading: false,
+        currentCommentReply: null
     }
 
     componentDidMount () {
@@ -123,13 +134,21 @@ class ProductDetail extends Component {
         
     }
 
-    onchangeHandler = (event) => {
-        const newCommentForm = {...this.state.commentForm};
-        newCommentForm.value = event.target.value;
-        this.setState({commentForm: newCommentForm});
+    onchangeHandler = (event, element) => {
+        if(element === 'commentForm') {
+            const newCommentForm = {...this.state.commentForm};
+            newCommentForm.value = event.target.value;
+            this.setState({commentForm: newCommentForm});
+        }
+        else if (element === 'replyForm') {
+            const newReplyForm = {...this.state.replyForm};
+            newReplyForm.value = event.target.value;
+            this.setState({replyForm: newReplyForm})
+        }
     }
 
-    onCommentHandler = (productId) => {
+    onCommentHandler = (event, productId) => {
+        event.preventDefault();
         if(this.props.authenticated) {
             let commentContent = {
                 content: this.state.commentForm.value
@@ -155,7 +174,57 @@ class ProductDetail extends Component {
         }
 
     }
+
+    replyClicked = (event, id) => {
+        if(!this.state.currentCommentReply || this.state.currentCommentReply !== id) {
+            this.setState({currentCommentReply: id})
+            const newReplyForm = {...this.state.replyForm};
+            newReplyForm.value = event.target.value;
+            this.setState({replyForm: newReplyForm})
+        }
+        else {
+            this.setState({currentCommentReply: null})
+            const newReplyForm = {...this.state.replyForm};
+            newReplyForm.value = event.target.value;
+            this.setState({replyForm: newReplyForm})
+        }
+    }
+
+    onReplyHandler = (event, commentId) => {
+        event.preventDefault();
+        console.log(commentId);
+    }
     render () {
+
+        const replyBodyFunction = (comment) => {
+            if(comment.id === this.state.currentCommentReply) {
+                let replyBody = comment.replies.map((reply) => {
+                    return (
+                        <Reply 
+                        key = {reply.timestamp}
+                        username = {reply.username}
+                        date = {reply.timestamp}
+                        content = {reply.content}/>
+                    )
+                });
+
+                return (
+                    <Aux>
+                        {replyBody}
+                        <form onSubmit ={(event) => this.onReplyHandler(event, comment.id)}>
+                                <Input elementType = {this.state.replyForm.elementType}
+                                elementConfig = {this.state.replyForm.elementConfig}
+                                value = {this.state.replyForm.value}
+                                changed = {(event) => this.onchangeHandler(event, 'replyForm')}/>
+                                <Button> Reply </Button>
+                                </form>
+                    </Aux>
+                )
+            }
+            else {
+                return null
+            }
+        }
 
         let productDetail = <Spinner />;
         if(!this.state.loading) {
@@ -192,22 +261,30 @@ class ProductDetail extends Component {
                 <div className = {classes.CommentSectionContainer}>
                     <h2>Comments</h2>
                     <div className = {classes.comments}>
-                    {/* <p>Lorem ipsum dolor sit amet, \consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <p>Lorem ipsum dolor sit amet, \consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> */}
                     {this.state.productDetails.comments.reverse().map((comment) => {
                         return <Comment key = {comment.id}
                         username = {comment.username}
                         date = {comment.timestamp}
-                        content = {comment.content}/>
+                        content = {comment.content}
+                        replies = {comment.replies.length}
+                        reply = {(event) => this.replyClicked (event, comment.id)}> 
+                            <div className = {classes.Replies}>
+                                {replyBodyFunction(comment)}
+                            </div>
+                        </Comment>
                     })}
+                    
                     </div>
-                    <Input elementType = {this.state.commentForm.elementType}
-                    elementConfig = {this.state.commentForm.elementConfig}
-                    value = {this.state.commentForm.value}
-                    changed = {(event) => this.onchangeHandler(event)}/>
-                    <div className = {classes.CommentButton}>
-                        <button onClick = {() => this.onCommentHandler(this.props.match.params.id)}>Comment</button>
-                    </div>
+                    <form onSubmit = {(event) => this.onCommentHandler(event, this.props.match.params.id)}>
+                        <Input elementType = {this.state.commentForm.elementType}
+                        elementConfig = {this.state.commentForm.elementConfig}
+                        value = {this.state.commentForm.value}
+                        changed = {(event) => this.onchangeHandler(event, 'commentForm')}/>
+                        <div className = {classes.CommentButton}>
+                            <Button>Comment</Button>
+                        </div>
+                    </form>
+                   
                 </div>
             </div>
             )
