@@ -19,7 +19,6 @@ class Products extends Component {
         this.setState({loading: true})
         axios.get('https://restapi-4u.herokuapp.com')
         .then(response => {
-            console.log(response);
             this.setState({products: response.data});
             this.setState({loading: false})
         }) 
@@ -52,8 +51,15 @@ class Products extends Component {
                 }
             })
             .then((response) => {
-                console.log(response)
-                this.upVotedUpdateHandler(productId, userId);
+                let copiedProductArray = [...this.state.products]
+                let productIdex = copiedProductArray.findIndex((product) => {
+                    return product.id === productId
+                });
+                let copiedUpvoters = [copiedProductArray[productIdex].upvoters];
+                copiedUpvoters = response.data.upvoters;
+                copiedProductArray[productIdex].upvoters = copiedUpvoters;
+                copiedProductArray[productIdex].total_upvotes = response.data.upvoters.length;
+                this.setState({products: copiedProductArray})
             })
             .catch((err) => {
                 console.log(err)
@@ -71,38 +77,6 @@ class Products extends Component {
         return upvoteStatus;
     }
 
-    upVotedUpdateHandler = (productId, userId) => {
-        let copiedProductArray = [...this.state.products];
-        let indexOfProduct = copiedProductArray.findIndex((product) => {
-            return product.id === productId;
-        })
-        
-        let upVoteChecker = copiedProductArray[indexOfProduct].upvoters.some((user) => {
-            return user.id === +userId
-        })
-
-        if(upVoteChecker) {
-            let newUpVoters = copiedProductArray[indexOfProduct].upvoters.filter((user) => {
-                if(user.id === +userId){
-                    copiedProductArray[indexOfProduct].total_upvotes = copiedProductArray[indexOfProduct].total_upvotes - 1;
-                    return false
-                }
-                else {
-                    return user;
-                }
-            })
-            copiedProductArray[indexOfProduct].upvoters = newUpVoters;
-            this.setState({products: copiedProductArray});
-        }
-        else{
-            copiedProductArray[indexOfProduct].total_upvotes = copiedProductArray[indexOfProduct].total_upvotes + 1;
-            let newUpVoters = [...copiedProductArray[indexOfProduct].upvoters];
-            newUpVoters.push({id: userId});
-            copiedProductArray[indexOfProduct].upvoters = newUpVoters;
-            this.setState({products: copiedProductArray});
-        }
-        
-    }
 
     render () {
 
@@ -124,7 +98,7 @@ class Products extends Component {
             return `${year}-${month}-${date}`;
         }
 
-        const productsLaunchDate = []
+        const productsLaunchDate = [];
 
         const dateDisplayHandler = (fullDate) => {
             const monthArray = ['Janaury', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -147,14 +121,20 @@ class Products extends Component {
             }
         }
 
-        this.state.products.forEach((product) => {
+        let productsSortForDate = [...this.state.products];
+
+        productsSortForDate.sort((a, b) => {
+            return b.id - a.id;
+        })
+
+        productsSortForDate.forEach((product) => {
             let fulldate = dateFormater(product.launch_date);
             if(!productsLaunchDate.includes(fulldate)){
                 productsLaunchDate.push(fulldate);
             }
 
-        })
-
+        });
+        
         const ProductBodyFunction = () => {
             let sortedProductBody = <div className = {classes.Products}>
                 {productsLaunchDate.reverse().map((date) => {

@@ -92,46 +92,15 @@ class ProductDetail extends Component {
                 }
             })
             .then((response) => {
-                console.log(response)
-                this.upVotedUpdateHandler(userId);
+                let copiedProductDetails = {...this.state.productDetails};
+                copiedProductDetails.upvote = response.data.upvoters;
+                copiedProductDetails.upvoteLength = response.data.upvoters.length;
+                this.setState({productDetails: copiedProductDetails});
             })
             .catch((err) => {
                 console.log(err)
             })
         }
-    }
-
-    upVotedUpdateHandler = (userId) => {
-        let copiedState = {...this.state.productDetails}
-        let copiedTotalvotes = [...copiedState.upvote];
-        
-        let upVoteChecker = copiedTotalvotes.some((user) => {
-            return user === +userId
-        })
-
-        if(upVoteChecker) {
-            let newUpVoters = copiedTotalvotes.filter((user) => {
-                if(user === +userId){
-                    copiedState.upvoteLength = copiedState.upvoteLength - 1;
-                    return false
-                }
-                else {
-                    return user;
-                }
-            })
-            copiedTotalvotes = newUpVoters;
-            copiedState.upvote = copiedTotalvotes
-            this.setState({productDetails: copiedState});
-        }
-        else{
-            let newUpVoters = [...copiedTotalvotes];
-            newUpVoters.push(userId);
-            copiedState.upvoteLength = copiedState.upvoteLength + 1;
-            copiedTotalvotes = newUpVoters;
-            copiedState.upvote = copiedTotalvotes
-            this.setState({productDetails: copiedState});
-        }
-        
     }
 
     onchangeHandler = (event, element) => {

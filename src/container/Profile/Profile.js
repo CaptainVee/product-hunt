@@ -72,8 +72,17 @@ class Profile extends Component {
                 }
             })
             .then((response) => {
-                console.log(response)
-                this.upVotedUpdateHandler(productId, userId);
+                let copiedUserInfo = {...this.state.userInfo};
+                let copiedUsersProduct = [...copiedUserInfo.product];
+                
+                let indexOfUpvotedProduct = copiedUsersProduct.findIndex((product) => {
+                    return product.id === productId;
+                });
+
+                copiedUsersProduct[indexOfUpvotedProduct].upvoters = response.data.upvoters;
+                copiedUsersProduct[indexOfUpvotedProduct].total_upvotes = response.data.upvoters.length;
+                copiedUserInfo.product = copiedUsersProduct;
+                this.setState({userInfo: copiedUserInfo})
             })
             .catch((err) => {
                 console.log(err)
@@ -81,41 +90,6 @@ class Profile extends Component {
         }
     } 
 
-    upVotedUpdateHandler = (productId, userId) => {
-        let copiedState = {...this.state.userInfo}
-        let copiedProductArray = [...copiedState.product];
-        let indexOfProduct = copiedProductArray.findIndex((product) => {
-            return product.id === productId;
-        })
-        
-        let upVoteChecker = copiedProductArray[indexOfProduct].upvoters.some((user) => {
-            return user.id === +userId
-        })
-
-        if(upVoteChecker) {
-            let newUpVoters = copiedProductArray[indexOfProduct].upvoters.filter((user) => {
-                if(user.id === +userId){
-                    copiedProductArray[indexOfProduct].total_upvotes = copiedProductArray[indexOfProduct].total_upvotes - 1;
-                    return false
-                }
-                else {
-                    return user;
-                }
-            })
-            copiedProductArray[indexOfProduct].upvoters = newUpVoters;
-            copiedState.product = copiedProductArray
-            this.setState({userInfo: copiedState});
-        }
-        else{
-            copiedProductArray[indexOfProduct].total_upvotes = copiedProductArray[indexOfProduct].total_upvotes + 1;
-            let newUpVoters = [...copiedProductArray[indexOfProduct].upvoters];
-            newUpVoters.push({id: userId});
-            copiedProductArray[indexOfProduct].upvoters = newUpVoters;
-            copiedState.product = copiedProductArray
-            this.setState({userInfo: copiedState});
-        }
-        
-    }
     render () {
         let profileBody = <Spinner />
 
