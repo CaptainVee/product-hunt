@@ -102,95 +102,97 @@ class ProductDetail extends Component {
     }
 
     onchangeHandler = (event, element) => {
-        // if(element === 'commentForm') {
+        if(element === 'commentForm') {
             const newCommentForm = {...this.state.commentForm};
             newCommentForm.value = event.target.value;
             this.setState({commentForm: newCommentForm});
-        // }
-        // else if (element === 'replyForm') {
-        //     const newReplyForm = {...this.state.replyForm};
-        //     newReplyForm.value = event.target.value;
-        //     this.setState({replyForm: newReplyForm})
-        // }
+        }
+        else if (element === 'replyForm') {
+            const newReplyForm = {...this.state.replyForm};
+            newReplyForm.value = event.target.value;
+            this.setState({replyForm: newReplyForm})
+        }
     }
 
-    // onCommentHandler = (event, productId) => {
-    //     event.preventDefault();
-    //     if(this.props.authenticated && (this.state.commentForm.value !== '')) {
-    //         let commentContent = {
-    //             content: this.state.commentForm.value
-    //         }
-    //         axios.post(
-    //             `https://restapi-4u.herokuapp.com/comment/create/?pk=${productId}`, commentContent, {
-    //             headers: {
-    //                 Authorization: `token ${this.props.token}`
-    //             }
-    //         })
-    //         .then((response) => {
-    //             const copiedProductDetail = {...this.state.productDetails}
-    //             const copiedCommentForm = {...this.state.commentForm}
-    //             copiedCommentForm.value = '';
-    //             copiedProductDetail.comments = response.data;
-    //             this.setState({productDetails: copiedProductDetail});
-    //             this.setState({commentForm: copiedCommentForm});
+    onCommentHandler = (event, productId) => {
+        event.preventDefault();
+        if(this.props.authenticated && (this.state.commentForm.value !== '')) {
+            let commentContent = {
+                content: this.state.commentForm.value
+            }
+            axios.post(
+                `https://restapi-4u.herokuapp.com/comment/create/?pk=${productId}`, commentContent, {
+                headers: {
+                    Authorization: `token ${this.props.token}`
+                }
+            })
+            .then((response) => {
+                const copiedProductDetail = {...this.state.productDetails}
+                const copiedCommentForm = {...this.state.commentForm}
+                copiedCommentForm.value = '';
+                copiedProductDetail.comments = response.data;
+                this.setState({productDetails: copiedProductDetail});
+                this.setState({commentForm: copiedCommentForm});
                 
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //         })
-    //     }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
 
-    // }
+    }
 
-    // replyClicked = (event, id) => {
-    //     if(!this.state.currentCommentReply || this.state.currentCommentReply !== id) {
-    //         this.setState({currentCommentReply: id})
-    //         const newReplyForm = {...this.state.replyForm};
-    //         newReplyForm.value = event.target.value;
-    //         this.setState({replyForm: newReplyForm})
-    //     }
-    //     else {
-    //         this.setState({currentCommentReply: null})
-    //         const newReplyForm = {...this.state.replyForm};
-    //         newReplyForm.value = event.target.value;
-    //         this.setState({replyForm: newReplyForm})
-    //     }
-    // }
+    replyClicked = (event, id) => {
+        if(!this.state.currentCommentReply || this.state.currentCommentReply !== id) {
+            this.setState({currentCommentReply: id})
+            const newReplyForm = {...this.state.replyForm};
+            newReplyForm.value = event.target.value;
+            this.setState({replyForm: newReplyForm})
+        }
+        else {
+            this.setState({currentCommentReply: null})
+            const newReplyForm = {...this.state.replyForm};
+            newReplyForm.value = event.target.value;
+            this.setState({replyForm: newReplyForm})
+        }
+    }
 
-    // onReplyHandler = (event, commentId) => {
-    //     event.preventDefault();
-    //     if(this.props.authenticated && (this.state.replyForm.value !== '')) {
-    //         let productId = this.props.match.params.id;
-    //         let replyContent = {
-    //             content: this.state.replyForm.value
-    //         }
-    //         axios.post(
-    //             `https://restapi-4u.herokuapp.com/comment/reply/create/?pk=${commentId}&product=${productId}`, replyContent, {
-    //             headers: {
-    //                 Authorization: `token ${this.props.token}`
-    //             }
-    //         })
-    //         .then((response) => {
-    //             const copiedProductDetail = {...this.state.productDetails}
-    //             const copiedReplyForm = {...this.state.replyForm}
-    //             copiedReplyForm.value = '';
-    //             copiedProductDetail.comments = response.data;
-    //             this.setState({productDetails: copiedProductDetail});
-    //             this.setState({replyForm: copiedReplyForm});
+    onReplyHandler = (event, commentId) => {
+        event.preventDefault();
+        if(this.props.authenticated && (this.state.replyForm.value !== '')) {
+            let productId = this.props.match.params.id;
+            let replyContent = {
+                content: this.state.replyForm.value
+            }
+            axios.post(
+                `https://restapi-4u.herokuapp.com/comment/reply/create/?pk=${commentId}&product=${productId}`, replyContent, {
+                headers: {
+                    Authorization: `token ${this.props.token}`
+                }
+            })
+            .then((response) => {
+                const copiedProductDetail = {...this.state.productDetails}
+                const copiedReplyForm = {...this.state.replyForm}
+                copiedReplyForm.value = '';
+                copiedProductDetail.comments = response.data;
+                this.setState({productDetails: copiedProductDetail});
+                this.setState({replyForm: copiedReplyForm});
                 
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //         })
-    //     }
-    // }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+    }
+
     render () {
 
         let newProductDetaisComments = [...this.state.productDetails.comments];
 
         const replyBodyFunction = (comment) => {
             if(comment.id === this.state.currentCommentReply) {
-                let replyBody = comment.replies.reverse().map((reply) => {
+                let copiedReplies = [...comment.replies]
+                let replyBody = copiedReplies.reverse().map((reply) => {
                     return (
                         <Reply 
                         key = {reply.timestamp}
