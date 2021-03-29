@@ -186,6 +186,8 @@ class ProductDetail extends Component {
     // }
     render () {
 
+        let newProductDetaisComments = [...this.state.productDetails.comments];
+
         const replyBodyFunction = (comment) => {
             if(comment.id === this.state.currentCommentReply) {
                 let replyBody = comment.replies.reverse().map((reply) => {
@@ -252,7 +254,7 @@ class ProductDetail extends Component {
                 <div className = {classes.CommentSectionContainer}>
                     <h2>Comments</h2>
                     <div className = {classes.comments}>
-                    {this.state.productDetails.comments.reverse().map((comment) => {
+                    {newProductDetaisComments.reverse().map((comment) => {
                         return <Comment key = {comment.id}
                         username = {comment.username}
                         date = {comment.timestamp}
