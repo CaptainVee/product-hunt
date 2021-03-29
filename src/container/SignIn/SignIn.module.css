@@ -13,7 +13,7 @@
     box-shadow: 4px 4px 18px rgba(0,0,0,0.1);
     border-radius: 1em;
     padding: 2em;
-    width: 35%;
+    width: 30%;
 }
 
 .SignInForm h2 {
@@ -33,4 +33,35 @@
     margin-top: -0.5em;
     margin-bottom: 0.9em;
     color: rgb(253, 89, 89);
+}
+
+@media(max-width: 768px) {
+    .FormContainer {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1em;
+    }
+
+    .SignInForm {
+        padding: 2em;
+        width: 70%;
+    }
+
+    .SignInForm h2 {
+        text-transform: uppercase;
+        color: #FB6D3A;
+        text-align: center;
+        font-size: 1.3rem;
+    }
+}
+
+@media(max-width: 414px) {
+
+    .SignInForm {
+        padding: 1em;
+        width: 100%;
+    }
+
 }

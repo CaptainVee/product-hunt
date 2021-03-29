@@ -30,3 +30,24 @@
 .ButtonContainer Button {
     width: 15em;
 }
+
+@media(max-width: 768px) {
+    .formContainer {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 2em;
+    }
+
+    .ProductForm {
+        width: 100%;
+        padding: 2em;
+    }
+}
+
+@media(max-width: 768px) {
+    .formContainer {
+      padding: 1em;
+    } 
+}

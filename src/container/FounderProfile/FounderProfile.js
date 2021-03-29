@@ -96,7 +96,7 @@ class FounderProfile extends Component {
         let productsContainer = null;
 
         if(this.state.userInfo.product.length === 0) {
-            productsContainer = <p>You don't have any recent activity</p>
+            productsContainer = <p>No Activity Yet</p>
         }
         else {
             productsContainer = (

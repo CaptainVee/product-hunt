@@ -8,6 +8,7 @@
     border-radius: 5px;
     background-color: white;
     transition: background-color 1s ease-in-out;
+    margin-left: 1em;
 }
 
 .NotProductUpVoted {
@@ -29,4 +30,22 @@
 
 .ProductVote p {
     font-weight: 600;
+}
+
+@media(max-width: 414px) {
+    .ProductVote {
+        height: 4em;
+        width: 8%;
+        margin-left: 1em;
+        padding: 0 1em;
+    }
+
+    .ProductVote img {
+        width: 10px;
+        height: 15px;
+    }
+    
+    .ProductVote p {
+        font-weight: 400;
+    }
 }

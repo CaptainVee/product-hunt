@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import classes from './NavBar.module.css';
@@ -6,13 +6,43 @@ import NavItems from './NavItems/NavItems';
 import NavItem from '../NavBar/NavItems/NavItem/NavItem';
 import NavButton from './NavItems/NavButton/NavButton';
 import Button from '../UI/Button/Button';
+import Menu from '../../assets/menu.svg';
+import CloseIcon from '../../assets/close_icon.svg';
 import * as actions from '../../store/actions/index';
 
 
-const NavBar = (props) => {
+class NavBar extends Component {
+    state = {
+        sideBar: false
+    }
 
-    let otherSide = null;
-    if(!props.authenticated) {
+
+    sideBarHandler = () => {
+        if(this.state.sideBar) {
+            this.setState({sideBar: false})
+        }
+        else {
+            this.setState({sideBar: true})
+        }
+        
+    }
+
+    closeSideBarHandler = () => {
+        if(this.state.sideBar) {
+            this.setState({sideBar: false})
+        }
+        else {
+            this.setState({sideBar: true})
+        }
+    }
+    render () {
+
+        let menuImage = Menu;
+        if(this.state.sideBar) {
+            menuImage = CloseIcon
+        }
+        let otherSide = null;
+    if(!this.props.authenticated) {
         otherSide = (
             <div className = {classes.NavButtons}>
                 <NavButton link = '/signin' styleName = 'SignIn'>Sign In</NavButton>
@@ -25,12 +55,15 @@ const NavBar = (props) => {
         otherSide = (
             <div className = {classes.NavButtons}>
                 <NavItem link = '/profile'>Profile</NavItem>
-                <Button clicked = {() => props.onLogOut()} >Log Out</Button>
+                <Button clicked = {() => this.props.onLogOut()} >Log Out</Button>
             </div>
         )
     }
-    return (
-        <header className = {classes.Header}>
+        return (
+            <header className = {classes.Header}>
+            <div className = {classes.MenuBar} onClick = {() => {this.sideBarHandler()}}>
+                 <img src = {menuImage} alt='Menu'/>
+             </div>
             <div className = {classes.NavAside}>
                 <div className = {classes.Logo}>
                     <div className = {classes.Initial}>
@@ -38,13 +71,23 @@ const NavBar = (props) => {
                     </div>
                     <h1>Hunt</h1>
                 </div>
-                <NavItems />
+                <div className = {classes.NavItems}>
+                    <NavItems />
+                </div>
             </div>
             {otherSide}
+            <div className = {classes.SideBar} 
+            style = {this.state.sideBar? {transform: 'translateX(0)'} : {transform: 'translateX(-100%)'}} 
+            onClick = {() => this.closeSideBarHandler()}>
+                <div className = {classes.NavItems}>
+                    <NavItems />
+                </div>
+                {otherSide}
+            </div>
         </header>
-    );
-}
-
+        );
+    }
+} 
 const mapStateToProps = state => {
     return {
         authenticated: state.authenticated

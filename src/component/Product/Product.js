@@ -31,11 +31,8 @@ const Product = (props) => {
                         </div>
                     </div>
                 </div>
-            <Upvote upvoted = {props.upvoted} total_upvotes = {props.total_upvotes} upvoteStatus = {props.upvoteStatus}/>
-                {/* <div className = {upVoteclasses.join(' ')} onClick = {props.upvoted}>
-                    <img src={Arrow_Up} alt = "Vote"/>
-                    <p className = {classes.Number}>{props.total_upvotes}</p>
-                </div>      */}
+                <Upvote upvoted = {props.upvoted} total_upvotes = {props.total_upvotes} upvoteStatus = {props.upvoteStatus}/>
+                
             </div>
     );
 }

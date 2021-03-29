@@ -32,3 +32,22 @@
     text-decoration: none;
     text-transform: uppercase;
 }
+
+@media(max-width: 768px) {
+    .SignIn {
+        height: 2.5em;
+        width: 5em;
+        border-radius: 0.5em;
+        font-size: 1rem;
+        margin-top: 1em;
+    }  
+    
+    .SignUp {
+        height: 2.5em;
+        width: 5em;
+        border-radius: 0.5em;
+        font-size: 1rem;
+        margin-left: 0;
+        margin-top: 1em;
+    }
+}

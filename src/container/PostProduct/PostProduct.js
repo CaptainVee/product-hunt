@@ -117,23 +117,6 @@ class PostProduct extends Component {
         const copiedProductForm = {...this.state.productForm}
         const copiedProductElement = {...copiedProductForm[element]}
 
-        // if(element === 'product_topics'){
-        //     if(!copiedProductElement.value.includes(event.target.value)) {
-        //         const newValueArray = [...copiedProductElement.value]
-        //         newValueArray.push(event.target.value);
-        //         console.log(event.target.value);
-        //         copiedProductElement.value = newValueArray;
-        //         copiedProductForm[element] = copiedProductElement;
-        //         this.setState({productForm: copiedProductForm});
-        //     }
-        //     else {
-        //         // let valueIndex = copiedProductElement.value.findIndex((value) => {
-        //         //     return value === event.target.value;
-        //         // });
-        //         // console.log(valueIndex);
-        //     }
-        // }
-        // else {
             if(element === 'thumbnail') {
                 copiedProductElement.image = event.target.files[0];
                 copiedProductElement.value = event.target.value;
@@ -146,7 +129,6 @@ class PostProduct extends Component {
                 this.setState({productForm: copiedProductForm});
             }
             
-        // }
     }
 
     onSubmitProduct = (event) => {
