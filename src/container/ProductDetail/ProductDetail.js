@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './ProductDetail.module.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 
 import UpvoteImage from '../../assets/arrow_up.svg';
@@ -59,7 +60,6 @@ class ProductDetail extends Component {
             copiedStateProductDetail.topics = copiedTopics;
             this.setState({productDetails: copiedStateProductDetail});
             this.setState({loading: false});
-            console.log(response);
         })
         .catch((err) => {
             console.log(err);
@@ -248,6 +248,9 @@ class ProductDetail extends Component {
                 <div className = {classes.ProductDescriptionSection}>
                     <div className={classes.ProductFonderSection}>
                         <h2>{this.state.productDetails.username} (Founder)</h2>
+                        <div className = {classes.AboutContainer}>
+                            <NavLink to = {`/founder-profile/${this.state.productDetails.user}`}>About</NavLink>
+                        </div>
                     </div>
                     <div className = {classes.ProductDescription}>
                         <p>{this.state.productDetails.content}</p>

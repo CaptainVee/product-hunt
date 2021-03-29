@@ -10,6 +10,7 @@ import SignIn from './container/SignIn/SignIn';
 import * as actions from './store/actions/index';
 import Profile from './container/Profile/Profile';
 import ProductDetail from './container/ProductDetail/ProductDetail';
+import FounderProfile from './container/FounderProfile/FounderProfile';
 
 class App extends Component {
   componentDidMount() {
@@ -30,8 +31,9 @@ class App extends Component {
               <Route path = '/post-product' component = {PostProduct} />
               <Route path = '/signup' component = {SignUp}/>
               <Route path = '/signin' component = {SignIn}/>
-              <Route path = '/' exact component = {Products}/>
               <Route path = '/product-detail/:id' exact component = {ProductDetail}/>
+              <Route path = '/founder-profile/:founderId' exact component = {FounderProfile}/>
+              <Route path = '/' component = {Products}/>
             </Switch>
         </Layout>
       </div>
