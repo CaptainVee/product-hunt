@@ -98,12 +98,30 @@ class Products extends Component {
             return `${year}-${month}-${date}`;
         }
 
+        const dateFormatertoBeDisplayed = (fullDate) => {
+            let date = new Date(fullDate).getDate();
+            let month = new Date(fullDate).getMonth() + 1;
+            let year = new Date(fullDate).getFullYear();
+
+            if(date < 10) {
+                date = `0${date}`;
+            }
+
+            if(month < 10) {
+                month = `0${month}`
+            }
+
+            return `${year}-${month}-${date}`;
+        }
+
         const productsLaunchDate = [];
+
+        const datesTobeDisplayed = [];
 
         const dateDisplayHandler = (fullDate) => {
             const monthArray = ['Janaury', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             let date = new Date(fullDate).getDate();
-            let month = new Date(fullDate).getMonth() + 1;
+            let month = new Date(fullDate).getMonth();
             let year = new Date(fullDate).getFullYear();
 
             let todayDate = new Date().getDate();
@@ -127,20 +145,31 @@ class Products extends Component {
             return b.id - a.id;
         })
 
+
         productsSortForDate.forEach((product) => {
             let fulldate = dateFormater(product.launch_date);
+            let fullDateToBedisplayed = dateFormatertoBeDisplayed(product.launch_date)
             if(!productsLaunchDate.includes(fulldate)){
                 productsLaunchDate.push(fulldate);
+                datesTobeDisplayed.push(fullDateToBedisplayed)
             }
 
         });
-        
+
+        const indexOfDate = (date) => {
+            let index = productsLaunchDate.findIndex((currentDate) => {
+                return date === currentDate;
+            })
+
+            return datesTobeDisplayed[index];
+        }
+
         const ProductBodyFunction = () => {
             let sortedProductBody = <div className = {classes.Products}>
-                {productsLaunchDate.reverse().map((date) => {
+                {productsLaunchDate.map((date) => {
                     return (
                         <Aux key = {date}>
-                            <h2 className = {classes.Date}>{dateDisplayHandler(date)}</h2>
+                            <h2 className = {classes.Date}>{dateDisplayHandler(indexOfDate(date))}</h2>
                             {productLooPFunction(date)}
                         </Aux>
                     )
