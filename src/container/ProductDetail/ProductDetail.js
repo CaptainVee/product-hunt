@@ -142,20 +142,20 @@ class ProductDetail extends Component {
 
     }
 
-    replyClicked = (event, id) => {
-        if(!this.state.currentCommentReply || this.state.currentCommentReply !== id) {
-            this.setState({currentCommentReply: id})
-            const newReplyForm = {...this.state.replyForm};
-            newReplyForm.value = event.target.value;
-            this.setState({replyForm: newReplyForm})
-        }
-        else {
-            this.setState({currentCommentReply: null})
-            const newReplyForm = {...this.state.replyForm};
-            newReplyForm.value = event.target.value;
-            this.setState({replyForm: newReplyForm})
-        }
-    }
+    // replyClicked = (event, id) => {
+    //     if(!this.state.currentCommentReply || this.state.currentCommentReply !== id) {
+    //         this.setState({currentCommentReply: id})
+    //         const newReplyForm = {...this.state.replyForm};
+    //         newReplyForm.value = event.target.value;
+    //         this.setState({replyForm: newReplyForm})
+    //     }
+    //     else {
+    //         this.setState({currentCommentReply: null})
+    //         const newReplyForm = {...this.state.replyForm};
+    //         newReplyForm.value = event.target.value;
+    //         this.setState({replyForm: newReplyForm})
+    //     }
+    // }
 
     onReplyHandler = (event, commentId) => {
         event.preventDefault();
