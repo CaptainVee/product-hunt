@@ -114,33 +114,33 @@ class ProductDetail extends Component {
         // }
     }
 
-    onCommentHandler = (event, productId) => {
-        event.preventDefault();
-        if(this.props.authenticated && (this.state.commentForm.value !== '')) {
-            let commentContent = {
-                content: this.state.commentForm.value
-            }
-            axios.post(
-                `https://restapi-4u.herokuapp.com/comment/create/?pk=${productId}`, commentContent, {
-                headers: {
-                    Authorization: `token ${this.props.token}`
-                }
-            })
-            .then((response) => {
-                const copiedProductDetail = {...this.state.productDetails}
-                const copiedCommentForm = {...this.state.commentForm}
-                copiedCommentForm.value = '';
-                copiedProductDetail.comments = response.data;
-                this.setState({productDetails: copiedProductDetail});
-                this.setState({commentForm: copiedCommentForm});
+    // onCommentHandler = (event, productId) => {
+    //     event.preventDefault();
+    //     if(this.props.authenticated && (this.state.commentForm.value !== '')) {
+    //         let commentContent = {
+    //             content: this.state.commentForm.value
+    //         }
+    //         axios.post(
+    //             `https://restapi-4u.herokuapp.com/comment/create/?pk=${productId}`, commentContent, {
+    //             headers: {
+    //                 Authorization: `token ${this.props.token}`
+    //             }
+    //         })
+    //         .then((response) => {
+    //             const copiedProductDetail = {...this.state.productDetails}
+    //             const copiedCommentForm = {...this.state.commentForm}
+    //             copiedCommentForm.value = '';
+    //             copiedProductDetail.comments = response.data;
+    //             this.setState({productDetails: copiedProductDetail});
+    //             this.setState({commentForm: copiedCommentForm});
                 
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-        }
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    //     }
 
-    }
+    // }
 
     // replyClicked = (event, id) => {
     //     if(!this.state.currentCommentReply || this.state.currentCommentReply !== id) {
@@ -157,33 +157,33 @@ class ProductDetail extends Component {
     //     }
     // }
 
-    onReplyHandler = (event, commentId) => {
-        event.preventDefault();
-        if(this.props.authenticated && (this.state.replyForm.value !== '')) {
-            let productId = this.props.match.params.id;
-            let replyContent = {
-                content: this.state.replyForm.value
-            }
-            axios.post(
-                `https://restapi-4u.herokuapp.com/comment/reply/create/?pk=${commentId}&product=${productId}`, replyContent, {
-                headers: {
-                    Authorization: `token ${this.props.token}`
-                }
-            })
-            .then((response) => {
-                const copiedProductDetail = {...this.state.productDetails}
-                const copiedReplyForm = {...this.state.replyForm}
-                copiedReplyForm.value = '';
-                copiedProductDetail.comments = response.data;
-                this.setState({productDetails: copiedProductDetail});
-                this.setState({replyForm: copiedReplyForm});
+    // onReplyHandler = (event, commentId) => {
+    //     event.preventDefault();
+    //     if(this.props.authenticated && (this.state.replyForm.value !== '')) {
+    //         let productId = this.props.match.params.id;
+    //         let replyContent = {
+    //             content: this.state.replyForm.value
+    //         }
+    //         axios.post(
+    //             `https://restapi-4u.herokuapp.com/comment/reply/create/?pk=${commentId}&product=${productId}`, replyContent, {
+    //             headers: {
+    //                 Authorization: `token ${this.props.token}`
+    //             }
+    //         })
+    //         .then((response) => {
+    //             const copiedProductDetail = {...this.state.productDetails}
+    //             const copiedReplyForm = {...this.state.replyForm}
+    //             copiedReplyForm.value = '';
+    //             copiedProductDetail.comments = response.data;
+    //             this.setState({productDetails: copiedProductDetail});
+    //             this.setState({replyForm: copiedReplyForm});
                 
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-        }
-    }
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    //     }
+    // }
     render () {
 
         const replyBodyFunction = (comment) => {
