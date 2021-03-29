@@ -8,12 +8,28 @@ const Reply = (props) => {
         let date = new Date(completeDate).getDate();
         let month = new Date (completeDate).getMonth();
         let year = new Date (completeDate).getFullYear();
-
+        let hours = new Date(completeDate).getHours();
+        let minutes = new Date(completeDate).getMinutes();
+        if(minutes < 10) {
+            minutes = `0${minutes}`;
+        }
         let todayDate = new Date().getDate();
         let todayMonth = new Date().getMonth();
         let todayYear = new Date().getFullYear();
+        
         if((date === todayDate) && (month === todayMonth) && (year === todayYear)) {
-            return 'Today';
+            if(hours > 12) {
+                hours = hours - 12;
+                if(hours < 10) {
+                    hours = `0${hours}`
+                }
+                return `${hours}:${minutes} PM`;
+            }else {
+                if(hours < 10) {
+                    hours = `0${hours}`
+                }
+                return `${hours}:${minutes} AM`;
+            }
         }
         else if(year === todayYear) {
             return `${date} ${monthArray[month]}`;

@@ -7,7 +7,6 @@
 
 .ProductDetailHeader {
     display: flex;
-    height: 10em;
     justify-content: space-between;
     align-items: center;
     padding: 2em;
@@ -24,8 +23,8 @@
 }
 
 .ImageContainer {
-    height: 8em;
-    width: 8em;
+    height: 9em;
+    width: 9em;
     margin-right: 1em;
 }
 
@@ -57,6 +56,11 @@
     background-color:  rgba(43, 40, 40, 0.1);
     border-radius: 4px;
     color: rgb(134, 130, 130);
+}
+
+.upVoteSection {
+    display: flex;
+    flex-direction: column;
 }
 
 .UpvoteContainer {
@@ -117,5 +121,20 @@
 .Replies {
     margin-left: 3em;
     margin-top: 0.8em;
+}
+
+.GetIt {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c7907d;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    padding: 1.3em 2em;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 

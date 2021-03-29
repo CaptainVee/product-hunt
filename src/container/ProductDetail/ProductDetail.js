@@ -25,16 +25,14 @@ class ProductDetail extends Component {
         commentForm : {
             elementType: 'textarea',
             elementConfig: {
-                placeholder: 'Comment',
-                required: true
+                placeholder: 'Comment'
             },
             value: '',
         },
         replyForm : {
             elementType: 'textarea',
             elementConfig: {
-                placeholder: 'Reply',
-                required: true
+                placeholder: 'Reply'
             },
             value: '',
         },
@@ -118,7 +116,7 @@ class ProductDetail extends Component {
 
     onCommentHandler = (event, productId) => {
         event.preventDefault();
-        if(this.props.authenticated) {
+        if(this.props.authenticated && (this.state.commentForm.value !== '')) {
             let commentContent = {
                 content: this.state.commentForm.value
             }
@@ -130,12 +128,12 @@ class ProductDetail extends Component {
             })
             .then((response) => {
                 const copiedProductDetail = {...this.state.productDetails}
-                let copiedCommentArray = [...copiedProductDetail.comments];
-                copiedCommentArray.push({content: response.data.content});
-                copiedProductDetail.comments = copiedCommentArray;
-                console.log(copiedCommentArray)
+                const copiedCommentForm = {...this.state.commentForm}
+                copiedCommentForm.value = '';
+                copiedProductDetail.comments = response.data;
                 this.setState({productDetails: copiedProductDetail});
-                console.log(response)
+                this.setState({commentForm: copiedCommentForm});
+                
             })
             .catch((err) => {
                 console.log(err)
@@ -161,13 +159,36 @@ class ProductDetail extends Component {
 
     onReplyHandler = (event, commentId) => {
         event.preventDefault();
-        console.log(commentId);
+        if(this.props.authenticated && (this.state.replyForm.value !== '')) {
+            let productId = this.props.match.params.id;
+            let replyContent = {
+                content: this.state.replyForm.value
+            }
+            axios.post(
+                `https://restapi-4u.herokuapp.com/comment/reply/create/?pk=${commentId}&product=${productId}`, replyContent, {
+                headers: {
+                    Authorization: `token ${this.props.token}`
+                }
+            })
+            .then((response) => {
+                const copiedProductDetail = {...this.state.productDetails}
+                const copiedReplyForm = {...this.state.replyForm}
+                copiedReplyForm.value = '';
+                copiedProductDetail.comments = response.data;
+                this.setState({productDetails: copiedProductDetail});
+                this.setState({replyForm: copiedReplyForm});
+                
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
     }
     render () {
 
         const replyBodyFunction = (comment) => {
             if(comment.id === this.state.currentCommentReply) {
-                let replyBody = comment.replies.map((reply) => {
+                let replyBody = comment.replies.reverse().map((reply) => {
                     return (
                         <Reply 
                         key = {reply.timestamp}
@@ -211,6 +232,7 @@ class ProductDetail extends Component {
                         </div>
                     </div>
                     <div className = {classes.upVoteSection}>
+                        <a href = {this.state.productDetails.url} target = '_blank' className = {classes.GetIt} rel ='noreferrer'>Get It</a>
                         <div className = {classes.UpvoteContainer} onClick = {() => this.upvoteHandler(this.props.token, +this.props.userId, this.props.match.params.id, this.props.authenticated)}>
                             <img src = { UpvoteImage } alt = 'Upvote'/>
                             <p>Upvote</p>
