@@ -26,3 +26,9 @@ export const authFail = () => {
         type: actionTypes.AUTH_FAIL
     }
 }
+
+export const logOut = () => {
+    return {
+        type: actionTypes.LOG_OUT
+    }
+}

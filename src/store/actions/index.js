@@ -2,4 +2,5 @@ export {
     redirect,
     resetRedirect,
     authSuccessful,
-    authFail } from './auth';
+    authFail,
+     logOut} from './auth';

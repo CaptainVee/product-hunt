@@ -36,6 +36,15 @@ const reducer = (state = initialState, action) => {
                 token: '',
                 authenticated: false
             }
+        case actionTypes.LOG_OUT:
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            return {
+                ...state,
+                token: '',
+                userId: '',
+                authenticated: false
+            }
         default :
             return state
     }

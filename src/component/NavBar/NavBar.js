@@ -5,6 +5,8 @@ import classes from './NavBar.module.css';
 import NavItems from './NavItems/NavItems';
 import NavItem from '../NavBar/NavItems/NavItem/NavItem';
 import NavButton from './NavItems/NavButton/NavButton';
+import Button from '../UI/Button/Button';
+import * as actions from '../../store/actions/index';
 
 
 const NavBar = (props) => {
@@ -21,8 +23,9 @@ const NavBar = (props) => {
 
     else {
         otherSide = (
-            <div>
+            <div className = {classes.NavButtons}>
                 <NavItem link = '/profile'>Profile</NavItem>
+                <Button clicked = {() => props.onLogOut()} >Log Out</Button>
             </div>
         )
     }
@@ -47,4 +50,10 @@ const mapStateToProps = state => {
         authenticated: state.authenticated
     }
 }
-export default connect(mapStateToProps)(NavBar);
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogOut: () => dispatch(actions.logOut())
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
