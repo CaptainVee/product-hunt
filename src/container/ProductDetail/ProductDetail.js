@@ -102,16 +102,16 @@ class ProductDetail extends Component {
     }
 
     onchangeHandler = (event, element) => {
-        if(element === 'commentForm') {
+        // if(element === 'commentForm') {
             const newCommentForm = {...this.state.commentForm};
             newCommentForm.value = event.target.value;
             this.setState({commentForm: newCommentForm});
-        }
-        else if (element === 'replyForm') {
-            const newReplyForm = {...this.state.replyForm};
-            newReplyForm.value = event.target.value;
-            this.setState({replyForm: newReplyForm})
-        }
+        // }
+        // else if (element === 'replyForm') {
+        //     const newReplyForm = {...this.state.replyForm};
+        //     newReplyForm.value = event.target.value;
+        //     this.setState({replyForm: newReplyForm})
+        // }
     }
 
     onCommentHandler = (event, productId) => {
