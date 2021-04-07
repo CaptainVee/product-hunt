@@ -13,6 +13,9 @@ const NavItems = (props) => {
     return (
         <ul className = {classes.NavItems}>
             <NavItem link = '/'>Products</NavItem>
+            <NavItem link = '#'>Discussions</NavItem>
+            <NavItem link = '#'>Blog</NavItem>
+            <NavItem link = '#'>About</NavItem>
             {postProduct}
         </ul>
     );

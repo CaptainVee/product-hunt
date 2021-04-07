@@ -1,53 +1,51 @@
 .SignIn {
-    height: 3em;
-    width: 6em;
-    border-radius: 1em;
-    color: white;
-    border: 1px solid #FB6D3A;
-    background-color: transparent;
-    outline: none;
-    font-size: 1.3rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    text-transform: uppercase;
+  height: 2.5em;
+  width: 5em;
+  border-radius: 0.5em;
+  color: white;
+  border: 1px solid #fb6d3a;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .SignUp {
-    height: 3em;
-    width: 6em;
-    border-radius: 1em;
-    color: white;
-    border: 1px solid #FB6D3A;
-    background-color: #FB6D3A;
-    outline: none;
-    font-size: 1.3rem;
-    cursor: pointer;
-    margin-left: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    text-transform: uppercase;
+  height: 2.5em;
+  width: 5em;
+  border-radius: 0.5em;
+  color: white;
+  border: 1px solid #fb6d3a;
+  background-color: #fb6d3a;
+  outline: none;
+  cursor: pointer;
+  margin-left: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
-@media(max-width: 768px) {
-    .SignIn {
-        height: 2.5em;
-        width: 5em;
-        border-radius: 0.5em;
-        font-size: 1rem;
-        margin-top: 1em;
-    }  
-    
-    .SignUp {
-        height: 2.5em;
-        width: 5em;
-        border-radius: 0.5em;
-        font-size: 1rem;
-        margin-left: 0;
-        margin-top: 1em;
-    }
+@media (max-width: 768px) {
+  .SignIn {
+    height: 2.5em;
+    width: 5em;
+    border-radius: 0.5em;
+    font-size: 1rem;
+    margin-top: 1em;
+  }
+
+  .SignUp {
+    height: 2.5em;
+    width: 5em;
+    border-radius: 0.5em;
+    font-size: 1rem;
+    margin-left: 0;
+    margin-top: 1em;
+  }
 }

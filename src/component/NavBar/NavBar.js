@@ -54,7 +54,7 @@ class NavBar extends Component {
     else {
         otherSide = (
             <div className = {classes.NavButtons}>
-                <NavItem link = '/profile'>Profile</NavItem>
+                <NavItem link = '/profile'>Profile </NavItem>
                 <Button clicked = {() => this.props.onLogOut()} >Log Out</Button>
             </div>
         )
@@ -67,9 +67,9 @@ class NavBar extends Component {
             <div className = {classes.NavAside}>
                 <div className = {classes.Logo}>
                     <div className = {classes.Initial}>
-                        <h1>P</h1>
+                        <h1 >P</h1>
                     </div>
-                    <h1>Hunt</h1>
+                    <input className = {classes.search} type="text" placeholder="Search.."></input>
                 </div>
                 <div className = {classes.NavItems}>
                     <NavItems />

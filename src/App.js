@@ -12,6 +12,7 @@ import Profile from './container/Profile/Profile';
 import ProductDetail from './container/ProductDetail/ProductDetail';
 import FounderProfile from './container/FounderProfile/FounderProfile';
 
+
 class App extends Component {
   componentDidMount() {
     if(localStorage.getItem('token') && localStorage.getItem('userId')){

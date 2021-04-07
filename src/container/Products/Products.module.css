@@ -1,19 +1,20 @@
 .Products {
-    display: flex;
-    flex-direction: column;
-    padding: 3em 8em;
-    width: 100%;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 3em 8em;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .Date {
-    border-bottom: 1px solid rgb(173, 170, 170);
-    margin-bottom: 1em;
-    padding-bottom: 0.3em;
+  margin-bottom: 1em;
+  padding-bottom: 0.3em;
+  font-size: 1em;
+  color: #cac7c5;
 }
 
-@media(max-width: 768px) {
-    .Products {
-        padding: 1em;
-    } 
+@media (max-width: 768px) {
+  .Products {
+    padding: 1em;
+  }
 }
