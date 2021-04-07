@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 10vh;
+    height: 11hv;
     background-color: #24292e;
     padding: 0 5em;
     position: fixed;
@@ -23,17 +23,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255,255,255, 0.5);
-    border: 1px solid white;
-    height: 4em;
-    width: 4em;
-    border-radius: 1em;
+    background-color: #fb6d3a;;
+    height: 3em;
+    width: 3em;
+    border-radius: 5px;
     margin-right: 0.6em;
-}
-
-.Initial h1 {
-    font-weight: 800;
-    color: white;
 }
 
 .Logo h1 {
