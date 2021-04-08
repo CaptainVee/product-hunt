@@ -1,13 +1,13 @@
 .Product {
   display: flex;
-  width: 100%;
+  width: 65%;
   padding: 2em;
-  border: 0.0625em solid #30363d;
+  border: 0.0625em solid #b8bcc1;
   border-radius: 0.375em;
   box-sizing: border-box;
-  box-shadow: 4px 4px 18px rgba(0, 0, 0, 0.2);
   align-items: center;
   cursor: pointer;
+  font-size: small;
   height: 10em;
   margin-bottom: 2em;
 }
@@ -40,23 +40,22 @@
 .Title {
   text-transform: uppercase;
   font-size: 1.2rem;
-  color: #c1552fe8;
+  color: #c1552f;
 }
 
 .Caption {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
   text-align: justify;
 }
 
 .Number {
   font-weight: 700;
-  font-size: 1rem;
 }
 
 .Topics {
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 
 .ProductCommentSection {
@@ -72,6 +71,9 @@
   border: 1px solid grey;
   margin-right: 0.5em;
   border-radius: 5px;
+}
+.ProductCommentImg {
+  width: 1.5em;
 }
 
 @media (max-width: 414px) {
@@ -128,5 +130,11 @@
   .ProductComment img {
     width: 1em;
     height: 1em;
+  }
+}
+
+@media (max-width: 768px) {
+  .Product {
+    width: 100%;
   }
 }

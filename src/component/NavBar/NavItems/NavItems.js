@@ -8,7 +8,7 @@ const NavItems = (props) => {
     let postProduct = null;
 
     if(props.authenticated) {
-        postProduct = (<NavItem link = '/post-product'>Post Product</NavItem>);
+        postProduct = (<NavItem link = '/post-product'>Post</NavItem>);
     }
     return (
         <ul className = {classes.NavItems}>

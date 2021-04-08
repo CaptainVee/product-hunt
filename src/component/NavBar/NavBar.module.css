@@ -18,8 +18,11 @@
   display: flex;
   align-items: center;
 }
-
-.search {
+.Image {
+  width: 40px;
+  border-radius: 50px;
+}
+.Search {
   float: right;
   padding: 6px;
   border: none;
@@ -68,7 +71,6 @@
 
 @media (max-width: 768px) {
   .Header {
-    height: 5em;
     padding: 0 1em;
   }
   .NavButtons {
@@ -85,7 +87,7 @@
   }
 
   .MenuBar img {
-    max-width: 100%;
+    max-width: 50%;
   }
 
   .Initial {
@@ -99,10 +101,8 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    height: 15em;
-    background-color: #503e9d;
-    width: 80%;
-    top: 5em;
+    background-color: #24292e;
+    top: 3.968em;
     left: -1em;
     padding: 1em 2em;
     transition: transform 0.5s ease-in-out;
