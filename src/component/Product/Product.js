@@ -10,7 +10,7 @@ const Product = (props) => {
     const productDetailRedirect = (productId) => {
         props.history.push(`/product-detail/${productId}`)
     }
-      
+    
     return (
         <div className = {classes.Product} onClick = {() => productDetailRedirect(props.id) }>
                 <div className = {classes.ProductImgCountainer}>
@@ -23,7 +23,7 @@ const Product = (props) => {
                     </div>
                     <div className = {classes.ProductCommentSection}>
                         <div className = {classes.ProductComment}>
-                            <img src={Comment} alt='Comment'/>
+                            <img className = {classes.ProductCommentImg} src={Comment} alt='Comment'/>
                             <p className = {classes.Number}>{props.comments}</p>
                         </div>
                         <div className = {classes.ProductCategory}>

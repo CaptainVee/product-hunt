@@ -7,6 +7,7 @@ import NavItem from '../NavBar/NavItems/NavItem/NavItem';
 import NavButton from './NavItems/NavButton/NavButton';
 import Button from '../UI/Button/Button';
 import Menu from '../../assets/menu.svg';
+import Store from '../../assets/store1.png';
 import CloseIcon from '../../assets/close_icon.svg';
 import * as actions from '../../store/actions/index';
 
@@ -54,7 +55,7 @@ class NavBar extends Component {
     else {
         otherSide = (
             <div className = {classes.NavButtons}>
-                <NavItem link = '/profile'>Profile</NavItem>
+                <NavItem link = '/profile'>Profile </NavItem>
                 <Button clicked = {() => this.props.onLogOut()} >Log Out</Button>
             </div>
         )
@@ -67,9 +68,9 @@ class NavBar extends Component {
             <div className = {classes.NavAside}>
                 <div className = {classes.Logo}>
                     <div className = {classes.Initial}>
-                        <h1>P</h1>
+                    <img  className = {classes.Image} src={Store} alt="Logo" />
                     </div>
-                    <h1>Hunt</h1>
+                    <input className = {classes.Search} type="text" placeholder="Search.."></input>
                 </div>
                 <div className = {classes.NavItems}>
                     <NavItems />

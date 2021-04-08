@@ -1,4 +1,5 @@
 .Header {
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -7,106 +8,122 @@
     background-color: #24292e;
     padding: 0 5em;
     position: fixed;
+
 }
 
 .NavAside {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .Logo {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+}
+.Image {
+  width: 40px;
+  border-radius: 50px;
+}
+.Search {
+  float: right;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
 }
 
 .Initial {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fb6d3a;;
-    height: 3em;
-    width: 3em;
-    border-radius: 5px;
-    margin-right: 0.6em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fb6d3ae8;
+  height: 3em;
+  width: 3em;
+  border-radius: 0.2em;
+  margin-right: 0.6em;
 }
 
+.Initial h1 {
+  font-weight: 800;
+  color: white;
+}
+
+
 .Logo h1 {
-    color: white;
+  color: white;
 }
 
 .NavButtons {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .NavButtons Button {
-    margin-left: 2em;
+  margin-left: 2em;
 }
 
 .MenuBar {
-    display: none;
-    cursor: pointer;
+  display: none;
+  cursor: pointer;
 }
 
 .SideBar {
-    display: none;
+  display: none;
 }
 
-@media(max-width: 768px) {
-    .Header {
-        height: 5em;
-        padding: 0 1em;
-    }
-    .NavButtons {
-        display: none;
-    }
-    
-    .NavItems {
-        display: none;
-    }
+@media (max-width: 768px) {
+  .Header {
+    padding: 0 1em;
+  }
+  .NavButtons {
+    display: none;
+  }
 
-    .MenuBar {
-        display: flex;
-        width: 3.5em;
-    }
+  .NavItems {
+    display: none;
+  }
 
-    .MenuBar img {
-        max-width: 100%;
-    }
+  .MenuBar {
+    display: flex;
+    width: 3.5em;
+  }
 
-    .Initial {
-        height: 3em;
-        width: 3em;
-        border-radius: 0.5em;
-        margin-right: 0.6em;
-    }
+  .MenuBar img {
+    max-width: 50%;
+  }
 
-    .SideBar {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        height: 15em;
-        background-color: #503E9D;
-        width: 80%;
-        top: 5em;
-        left: -1em;
-        padding: 1em 2em;
-        transition: transform 0.5s ease-in-out;
-    }
+  .Initial {
+    height: 3em;
+    width: 3em;
+    border-radius: 0.5em;
+    margin-right: 0.6em;
+  }
 
-    .SideBar .NavItems {
-        display: flex;
-        flex-direction: column;
-    }
+  .SideBar {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: #24292e;
+    top: 3.968em;
+    left: -1em;
+    padding: 1em 2em;
+    transition: transform 0.5s ease-in-out;
+  }
 
-    .SideBar .NavButtons{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  .SideBar .NavItems {
+    display: flex;
+    flex-direction: column;
+  }
 
-    .SideBar .NavButtons Button {
-        margin-left: 0;   
-    }
+  .SideBar .NavButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
+  .SideBar .NavButtons Button {
+    margin-left: 0;
+  }
 }

@@ -1,20 +1,19 @@
 .Button {
-    height: 3em;
-    width: 6em;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    background-color: #FB6D3A;
-    outline: none;
-    text-transform: uppercase;
-    font-size: 1.2rem;
-    cursor: pointer;
+  height: 2.5em;
+  width: 5em;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: #fb6d3a;
+  outline: none;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .Button:focus {
-    box-shadow: 4px 4px 5px rgba(0,0,0,0.2);
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
 }
 
-.Button:hover{
-    box-shadow: 4px 4px 5px rgba(0,0,0,0.2);   
+.Button:hover {
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
 }

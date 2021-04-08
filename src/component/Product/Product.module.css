@@ -1,133 +1,140 @@
 .Product {
-    display: flex;
-    width: 100%;
-    padding: 2em;
-    border-radius: 1em;
-    box-sizing: border-box;
-    box-shadow: 4px 4px 18px rgba(0,0,0,0.2);
-    align-items: center;
-    cursor: pointer;
-    height: 10em;
-    margin-bottom: 2em;
-    background-color: white;
-    transition: background-color 1s ease-in-out;
+  display: flex;
+  width: 65%;
+  padding: 2em;
+  border: 0.0625em solid #b8bcc1;
+  border-radius: 0.375em;
+  box-sizing: border-box;
+  align-items: center;
+  cursor: pointer;
+  font-size: small;
+  height: 10em;
+  margin-bottom: 2em;
 }
 
 .Product:hover {
-    background-color: rgba(0,0,0,0.05);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .ProductImgCountainer {
-    display: flex;
-    height: 8em;
-    width: 15%;
-    align-items: center;
+  display: flex;
+  height: 8em;
+  width: 15%;
+  align-items: center;
 }
 
 .ProductImgCountainer img {
-    height: 8em;
-    max-width: 100%;
+  height: 8em;
+  max-width: 100%;
 }
 
 .ProductInfo {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    margin-left: 2em;
-    justify-content: space-between;
-    height: 8em;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin-left: 2em;
+  justify-content: space-between;
+  height: 8em;
 }
 
 .Title {
-    text-transform: uppercase;
-    font-size: 1.2rem;
-    color: #FB6D3A;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  color: #c1552f;
 }
 
 .Caption {
-    font-size: 1rem;
-    font-weight: 500;
-    text-align: justify;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: justify;
 }
 
 .Number {
-    font-weight: 700;
-    font-size: 1rem;
+  font-weight: 700;
 }
 
 .Topics {
-    font-weight: 500;
-    font-size: 1rem;
+  font-weight: 500;
+  font-size: 0.7rem;
 }
 
 .ProductCommentSection {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .ProductComment {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.1em 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1em 0.5em;
+  border: 1px solid grey;
+  margin-right: 0.5em;
+  border-radius: 5px;
+}
+.ProductCommentImg {
+  width: 1.5em;
+}
+
+@media (max-width: 414px) {
+  .Product {
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    height: auto;
+    margin-bottom: 2em;
+  }
+
+  .ProductImgCountainer {
+    height: 4em;
+    width: 15%;
+  }
+
+  .ProductImgCountainer img {
+    height: 4em;
+    width: 4em;
+  }
+
+  .ProductInfo {
+    margin-left: 1em;
+    height: auto;
+  }
+
+  .Title {
+    font-size: 0.7rem;
+  }
+
+  .Caption {
+    font-size: 0.7rem;
+    font-weight: 400;
+  }
+
+  .Number {
+    font-weight: 500;
+    font-size: 0.7rem;
+  }
+
+  .Topics {
+    font-weight: 400;
+    font-size: 0.7rem;
+  }
+  .ProductComment {
+    padding: 0.1em 0.3em;
     border: 1px solid grey;
     margin-right: 0.5em;
     border-radius: 5px;
+  }
+  .ProductCommentSection {
+    margin-top: 0.3em;
+  }
+
+  .ProductComment img {
+    width: 1em;
+    height: 1em;
+  }
 }
 
-@media(max-width: 414px) {
-    .Product {
-        padding: 0.5em 1em;
-        border-radius: 0.5em;
-        height: auto;
-        margin-bottom: 2em;
-    }
-
-    .ProductImgCountainer {
-        height: 4em;
-        width: 15%;
-    }
-
-    .ProductImgCountainer img {
-        height: 4em;
-        width: 4em;
-    }
-
-    .ProductInfo {
-        margin-left: 1em;
-        height: auto;
-    }
-
-    .Title {
-        font-size: 0.7rem;
-    }
-
-    .Caption {
-        font-size: 0.7rem;
-        font-weight: 400;
-    }
-
-    .Number {
-        font-weight: 500;
-        font-size: 0.7rem;
-    }
-
-    .Topics {
-        font-weight: 400;
-        font-size: 0.7rem;
-    }
-    .ProductComment {
-        padding: 0.1em 0.3em;
-        border: 1px solid grey;
-        margin-right: 0.5em;
-        border-radius: 5px;
-    }
-    .ProductCommentSection {
-        margin-top: 0.3em;
-    }
-
-    .ProductComment img {
-        width: 1em;
-        height: 1em;
-    }
+@media (max-width: 768px) {
+  .Product {
+    width: 100%;
+  }
 }
