@@ -1,12 +1,14 @@
 .Header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 10vh;
-  background-color: #24292e;
-  padding: 0 5em;
-  position: fixed;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 11hv;
+    background-color: #24292e;
+    padding: 0 5em;
+    position: fixed;
+
 }
 
 .NavAside {
@@ -32,6 +34,7 @@
 }
 
 .Initial {
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,6 +49,7 @@
   font-weight: 800;
   color: white;
 }
+
 
 .Logo h1 {
   color: white;
