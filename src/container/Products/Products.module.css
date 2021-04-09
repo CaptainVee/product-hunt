@@ -1,9 +1,10 @@
 .Products {
   display: flex;
   flex-direction: column;
-  padding: 3em 8em;
-  width: 100%;
   box-sizing: border-box;
+  padding-top: 6em;
+  padding-left: 7em;
+  padding-right: 3em;
 }
 
 .Date {
