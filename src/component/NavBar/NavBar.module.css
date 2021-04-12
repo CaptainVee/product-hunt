@@ -1,19 +1,18 @@
 .Header {
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 11hv;
-    background-color: #24292e;
-    padding: 0 5em;
-    position: fixed;
-
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 11%;
+  background-color: #24292e;
+  padding: 0 5em;
+  position: fixed;
 }
 
 .NavAside {
   display: flex;
   align-items: center;
+  max-width: 85%;
 }
 
 .Logo {
@@ -34,7 +33,6 @@
 }
 
 .Initial {
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,7 +47,6 @@
   font-weight: 800;
   color: white;
 }
-
 
 .Logo h1 {
   color: white;
@@ -91,7 +88,7 @@
   }
 
   .MenuBar img {
-    max-width: 50%;
+    max-width: 1.8em;
   }
 
   .Initial {
@@ -106,7 +103,7 @@
     flex-direction: column;
     position: absolute;
     background-color: #24292e;
-    top: 3.968em;
+    top: 4.4em;
     left: -1em;
     padding: 1em 2em;
     transition: transform 0.5s ease-in-out;
